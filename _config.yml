@@ -1,3 +1,6 @@
+# CPUs for parallel jobs
+n_cores: 4
+
 # Choose method
 share_official: false
 share_custom: true

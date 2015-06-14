@@ -41,6 +41,9 @@ like:
 And set your configuration in **_config.yml**:
 
 
+    # CPUs for parallel jobs
+    n_cores: 4
+
     # Choose method
     share_official: false
     share_custom: true
@@ -70,3 +73,4 @@ and store to the memory.
 But only buttons which are enabled are shown in **sharing_custom.html**.
 (Useful if you want to use in other places.)
 
+`n_cores` is used in the plugin, to decide how many threads should run.
