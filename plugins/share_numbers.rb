@@ -65,7 +65,7 @@ module Jekyll
     end
 
     def get_linkedin(url)
-      get_number('https://www.linkedin.com/countserv/count/share?format=json&url=' + url).to_i
+      get_number('https://www.linkedin.com/countserv/count/share?format=json&url=' + url, 'json', 'count').to_i
     end
 
     def get_stumble(url)
