@@ -17,6 +17,7 @@ linkedin_button: false
 stumble_button: false
 pinterest_button: false
 delicious_button: false
+tumblr_button: false
 
 # jekyll-var
 jekyll_var:

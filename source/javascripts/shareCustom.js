@@ -100,20 +100,20 @@ $(function(){
       $('.stumbleCount[data-share-url="'+url+'"]').data("count",0);
     };
   };
-  socialFunc.delicious = function(socialData, url){
-    socialData.url = '//feeds.delicious.com/v2/json/urlinfo/data';
-    socialData.data.url = url;
-    socialData.success = function(data){
-      $('.deliciousCount[data-share-url="'+url+'"]').text((data.length>0)? data[0].total_posts : 0);
-      $('.deliciousCount[data-share-url="'+url+'"]').data("count",(data.length>0)? data[0].total_posts : 0);
-    };
-  };
   socialFunc.pinterest = function(socialData, url){
     socialData.url = '//api.pinterest.com/v1/urls/count.json';
     socialData.data.url = url;
     socialData.success = function(data){
       $('.pinterestCount[data-share-url="'+url+'"]').text(data.count||0);
       $('.pinterestCount[data-share-url="'+url+'"]').data("count",data.count||0);
+    };
+  };
+  socialFunc.delicious = function(socialData, url){
+    socialData.url = '//feeds.delicious.com/v2/json/urlinfo/data';
+    socialData.data.url = url;
+    socialData.success = function(data){
+      $('.deliciousCount[data-share-url="'+url+'"]').text((data.length>0)? data[0].total_posts : 0);
+      $('.deliciousCount[data-share-url="'+url+'"]').data("count",(data.length>0)? data[0].total_posts : 0);
     };
   };
 });

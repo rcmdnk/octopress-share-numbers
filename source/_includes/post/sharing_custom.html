@@ -5,6 +5,8 @@
 {% endif %}
 {% capture share_url %}{{ site.url | uri_escape}}{{ p.url | uri_escape}}{% endcapture %}
 {% capture share_title %}{{ p.title }}{% endcapture %}
+{% capture n_views %}{% if p._pv %}{{ p._pv }}{% else %}0{% endif %}{% endcapture %}
+{% if page.share_all %}{% assign views = true %}{%elsif p.views_button != nil %}{% assign views = p.views_button %}{% else %}{% assign views = site.views_button %}{% endif %}
 {% if page.share_all %}{% assign hatebu = true %}{%elsif p.hatebu_button != nil %}{% assign hatebu = p.hatebu_button %}{% else %}{% assign hatebu = site.hatebu_button %}{% endif %}
 {% if page.share_all %}{% assign twitter = true %}{%elsif p.twitter_button != nil %}{% assign twitter = p.twitter_button %}{% else %}{% assign twitter = site.twitter_button %}{% endif %}
 {% if page.share_all %}{% assign googleplus = true %}{%elsif p.googleplus_button != nil %}{% assign googleplus = p.googleplus_button %}{% else %}{% assign googleplus = site.googleplus_button %}{% endif %}
@@ -14,9 +16,15 @@
 {% if page.share_all %}{% assign stumble = true %}{%elsif p.stumble_button != nil %}{% assign stumble = p.stumble_button %}{% else %}{% assign stumble = site.stumble_button %}{% endif %}
 {% if page.share_all %}{% assign delicious = true %}{%elsif p.delicious_button != nil %}{% assign delicious = p.delicious_button %}{% else %}{% assign delicious = site.delicious_button %}{% endif %}
 {% if page.share_all %}{% assign pinterest = true %}{%elsif p.pinterest_button != nil %}{% assign pinterest = p.pinterest_button %}{% else %}{% assign pinterest = site.pinterest_button %}{% endif %}
+{% if page.share_all %}{% assign tumblr = true %}{%elsif p.tumblr_button != nil %}{% assign tumblr = p.tumblr_button %}{% else %}{% assign tumblr = site.tumblr_button %}{% endif %}
 
 <div class="share-button">
   <ul>
+    {% if views %}
+    <li><a href="{{share_url}}"
+    title="Views by Analytics"
+    target="_blank"><p class="views_custom" >View <span class="viewsCount" data-share-url="{{share_url}}">{{n_views}} </span></p></a></li>
+    {% endif %}
     {% if hatebu %}
     <li><a href="http://b.hatena.ne.jp/entry/{{share_url}}"
     title="Save to Hatebu"
@@ -52,15 +60,23 @@
     title="Save to StumbleUpon"
     target="_blank"><p  class="stumble_custom"><i class="fa fa-stumbleupon"></i> <span class="stumbleCount" data-share-url="{{share_url}}">{{p.stumbleCount}}</span></p></a></li>
     {% endif %}
+    {% if pinterest %}
+    <li><a href="http://pinterest.com/pin/create/button/?url={{share_url}}&title={{share_title}}"
+    title="Save to Pinterest"
+    target="_blank"><p  class="pinterest_custom"><i class="fa fa-pinterest"></i> <span class="pinterestCount" data-share-url="{{share_url}}">{{p.pinterestCount}}</span></p></a></li>
+    {% endif %}
     {% if delicious %}
     <li><a href="https://delicious.com/save?v=5&provider={{site.author}}&noui&jump=close&url={{share_url}}&title={{share_title}}"
     title="Save to Delicious"
     target="_blank"><p  class="delicious_custom"><i class="fa fa-delicious"></i> <span class="deliciousCount" data-share-url="{{share_url}}">{{p.deliciousCount}}</span></p></a></li>
     {% endif %}
-    {% if pinterest %}
-    <li><a href="http://pinterest.com/pin/create/button/?url={{share_url}}&title={{share_title}}"
-    title="Save to Pinterest"
-    target="_blank"><p  class="pinterest_custom"><i class="fa fa-pinterest"></i> <span class="pinterestCount" data-share-url="{{share_url}}">{{p.pinterestCount}}</span></p></a></li>
+    {% if tumblr %}
+    {% capture description %}{% if p.description %}{{ p.description }}{% endif %}{% endcapture %}
+    {% capture description %}{{ description | strip_html | codense_spaces | truncate:150 }}{% endcapture %}
+    <li><a
+    href="http://www.tumblr.com/share/link?url={{share_url|cgi_escape}}&name={{share_title|cgi_escape}}&description={{description|cgi_escape}}"
+    title="Share on Tumblr"
+    target="_blank"><p  class="tumblr_custom"><i class="fa fa-tumblr"></i></p></a></li>
     {% endif %}
   </ul>
 </div>
