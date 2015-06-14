@@ -12,8 +12,8 @@ Available social buttons are:
 * [LinkedIn](https://www.linkedin.com/)
 * [StumbleUpon](https://www.stumbleupon.com/)
 * [Pinterest](https://pinterest.com/)
-* [Delicious](https://delicious.com/)
-* [Tumblr](https://www.tumblr.com/)
+* [Delicious](https://delicious.com/) (currently count is not available)
+* [Tumblr](https://www.tumblr.com/) (Only button w/o cound)
 
 # Requirement
 
