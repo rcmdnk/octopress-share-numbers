@@ -67,7 +67,7 @@
     target="_blank"><p  class="pinterest_custom"><i class="fa fa-pinterest"></i> <span class="pinterestCount" data-share-url="{{share_url}}">{{p.pinterestCount}}</span></p></a></li>
     {% endif %}
     {% if buffer %}
-    <li><a href="http://buffer.com/pin/create/button/?url={{share_url}}&title={{share_title}}"
+    <li><a href="https://api.bufferapp.com/1/links/shares.json?url={{share_url}}&title={{share_title}}"
     title="Save to buffer"
     target="_blank"><p  class="buffer_custom">B <span class="bufferCount" data-share-url="{{share_url}}">{{p.bufferCount}}</span></p></a></li>
     {% endif %}
