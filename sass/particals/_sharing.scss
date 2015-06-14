@@ -72,6 +72,7 @@ $pocket-color: #EF4257;
 $linkedin-color: #4E8BBF;
 $stumble-color: #EB4823;
 $pinterest-color: #A70216;
+$buffer-color: #000000;
 $delicious-color: #3399FF;
 $tumblr-color: #9DA6B0;
 
@@ -209,6 +210,14 @@ $tumblr-color: #9DA6B0;
         &:hover {
           background-color: darken($pinterest-color, 10);
           border-color: darken($pinterest-color, 10);
+        }
+      }
+      &.buffer_custom {
+        background-color: $buffer-color;
+        border-color: $buffer-color;
+        &:hover {
+          background-color: darken($buffer-color, 10);
+          border-color: darken($buffer-color, 10);
         }
       }
       &.delicious_custom {

@@ -16,6 +16,7 @@ pocket_button: true
 linkedin_button: false
 stumble_button: false
 pinterest_button: false
+buffer_button: false
 delicious_button: false
 tumblr_button: false
 
@@ -30,5 +31,6 @@ jekyll_var:
     - linkedin_button
     - stumble_button
     - pinterest_button
+    - buffer_button
     - delicious_button
     - share_all

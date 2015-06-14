@@ -14,8 +14,9 @@
 {% if page.share_all %}{% assign pocket = true %}{%elsif p.pocket_button != nil %}{% assign pocket = p.pocket_button %}{% else %}{% assign pocket = site.pocket_button %}{% endif %}
 {% if page.share_all %}{% assign linkedin = true %}{%elsif p.linkedin_button != nil %}{% assign linkedin = p.linkedin_button %}{% else %}{% assign linkedin = site.linkedin_button %}{% endif %}
 {% if page.share_all %}{% assign stumble = true %}{%elsif p.stumble_button != nil %}{% assign stumble = p.stumble_button %}{% else %}{% assign stumble = site.stumble_button %}{% endif %}
-{% if page.share_all %}{% assign delicious = true %}{%elsif p.delicious_button != nil %}{% assign delicious = p.delicious_button %}{% else %}{% assign delicious = site.delicious_button %}{% endif %}
 {% if page.share_all %}{% assign pinterest = true %}{%elsif p.pinterest_button != nil %}{% assign pinterest = p.pinterest_button %}{% else %}{% assign pinterest = site.pinterest_button %}{% endif %}
+{% if page.share_all %}{% assign buffer = true %}{%elsif p.buffer_button != nil %}{% assign buffer = p.buffer_button %}{% else %}{% assign buffer = site.buffer_button %}{% endif %}
+{% if page.share_all %}{% assign delicious = true %}{%elsif p.delicious_button != nil %}{% assign delicious = p.delicious_button %}{% else %}{% assign delicious = site.delicious_button %}{% endif %}
 {% if page.share_all %}{% assign tumblr = true %}{%elsif p.tumblr_button != nil %}{% assign tumblr = p.tumblr_button %}{% else %}{% assign tumblr = site.tumblr_button %}{% endif %}
 
 <div class="share-button">
@@ -64,6 +65,11 @@
     <li><a href="http://pinterest.com/pin/create/button/?url={{share_url}}&title={{share_title}}"
     title="Save to Pinterest"
     target="_blank"><p  class="pinterest_custom"><i class="fa fa-pinterest"></i> <span class="pinterestCount" data-share-url="{{share_url}}">{{p.pinterestCount}}</span></p></a></li>
+    {% endif %}
+    {% if buffer %}
+    <li><a href="http://buffer.com/pin/create/button/?url={{share_url}}&title={{share_title}}"
+    title="Save to buffer"
+    target="_blank"><p  class="buffer_custom">B <span class="bufferCount" data-share-url="{{share_url}}">{{p.bufferCount}}</span></p></a></li>
     {% endif %}
     {% if delicious %}
     <li><a href="https://delicious.com/save?v=5&provider={{site.author}}&noui&jump=close&url={{share_url}}&title={{share_title}}"

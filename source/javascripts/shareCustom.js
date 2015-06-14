@@ -108,6 +108,14 @@ $(function(){
       $('.pinterestCount[data-share-url="'+url+'"]').data("count",data.count||0);
     };
   };
+  socialFunc.buffer = function(socialData, url){
+    socialData.url = '//api.bufferapp.com/1/links/shares.json';
+    socialData.data.url = url;
+    socialData.success = function(data){
+      $('.bufferCount[data-share-url="'+url+'"]').text(data.shares||0);
+      $('.bufferCount[data-share-url="'+url+'"]').data("count",data.shares||0);
+    };
+  };
   socialFunc.delicious = function(socialData, url){
     socialData.url = '//feeds.delicious.com/v2/json/urlinfo/data';
     socialData.data.url = url;
@@ -156,7 +164,7 @@ $(function(){
   var socials=[];
   var smarks = ["hatebu", "twitter", "googleplus",
                "facebook", "pocket", "linkedin",
-               "stumble", "pinterest", "delicious"]
+               "stumble", "pinterest", "buffer", "delicious"]
   for(var i=0;i<smarks.length;i++){
     if(jekyll_var("share_all")||jekyll_var(smarks[i]+'_button'))socials.push(smarks[i]);
   }

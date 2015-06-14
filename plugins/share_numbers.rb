@@ -77,6 +77,14 @@ module Jekyll
       end
     end
 
+    def get_pinterest(url)
+      get_number('https://api.pinterest.com/v1/urls/count.json?url=' + url, 'json', 'count', ['receiveCount(',')']).to_i
+    end
+
+    def get_buffer(url)
+      get_number('https://api.bufferapp.com/1/links/shares.json?url=' + url, 'json', 'shares').to_i
+    end
+
     def get_delicious(url)
       h = get_number('https://feeds.delicious.com/v2/json/urlinfo/data?url=' + url, 'jsonfull')
       begin
@@ -86,10 +94,6 @@ module Jekyll
       end
     end
 
-    def get_pinterest(url)
-      get_number('https://api.pinterest.com/v1/urls/count.json?url=' + url, 'json', 'count', ['receiveCount(',')']).to_i
-    end
-
     def method_missing(method, *args)
       return nil
     end
@@ -97,7 +101,7 @@ module Jekyll
     def get_shares(page, config, m)
       url = config['url'] + page.url
       shares = ['hatebu', 'twitter', 'googleplus', 'facebook', 'pocket',
-                'linkedin', 'stumble', 'delicious', 'pinterest']
+                'linkedin', 'stumble', 'pinterest', 'buffer', 'delicious']
       if not config['share_check_all']
         shares = config.select{|key, val| key.is_a?(String) and key.end_with?('_button') and val == true}.keys
       end

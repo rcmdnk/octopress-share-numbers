@@ -12,6 +12,7 @@ Available social buttons are:
 * [LinkedIn](https://www.linkedin.com/)
 * [StumbleUpon](https://www.stumbleupon.com/)
 * [Pinterest](https://pinterest.com/)
+* [Buffer](https://buffer.com/) (not in shareing.html)
 * [Delicious](https://delicious.com/) (currently count is not available)
 * [Tumblr](https://www.tumblr.com/) (Only button w/o cound)
 
@@ -84,6 +85,7 @@ And set your configuration in **_config.yml**:
     linkedin_button: false
     stumble_button: false
     pinterest_button: false
+    buffer_button: false
     delicious_button: false
     tumblr_button: false
     
@@ -98,6 +100,7 @@ And set your configuration in **_config.yml**:
         - linkedin_button
         - stumble_button
         - pinterest_button
+        - buffer_button
         - delicious_button
         - share_all
 
