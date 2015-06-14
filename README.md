@@ -37,7 +37,11 @@ There are three methods:
     to your **source/_includes/post/**.
     * Copy **plugins/share_numbers.rb** to your **plugins**.
 
+Copy **sass/particals/_sharing.scss** to you **sass/particals/**.
+And put `@import "particals/sharing"` in you **sass/_partials.scss**.
+
 # Usage
+
 
 Put **shareCustom.js** in **source/_includes/head.html**, after jQuery (**shareCustom.js** uses jQuery):
 
