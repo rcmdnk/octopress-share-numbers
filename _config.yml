@@ -1,0 +1,30 @@
+# Choose method
+share_official: false
+share_custom: true
+share_static: true
+share_check_all: false
+
+# Select shares
+hatebu_button: true
+twitter_button: true
+googleplus_button: true
+facebook_button: true
+pocket_button: true
+linkedin_button: false
+stumble_button: false
+pinterest_button: false
+delicious_button: false
+
+# jekyll-var
+jekyll_var:
+  include:
+    - hatebu_button
+    - twitter_button
+    - googleplus_button
+    - facebook_button
+    - pocket_button
+    - linkedin_button
+    - stumble_button
+    - pinterest_button
+    - delicious_button
+    - share_all

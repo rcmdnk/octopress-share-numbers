@@ -1,0 +1,72 @@
+# octopress-share-numbers
+Get share numbers.
+
+# Requirement
+
+To use active mode with JavaScript,
+please install
+[rcmdnk/jekyll-var-to-js](https://github.com/rcmdnk/jekyll-var-to-js), too.
+
+# Installation
+
+Copy **source/_includes/post/sharing_custom.html**
+to your **source/_includes/post/**.
+
+For active mode with JavaScript,
+copy **source/javascripts/shareCustom.js** to your **soruce/javascripts** directory.
+
+For static mode with plugin,
+copy **plugins/share_numbers.rb** to your **plugins** directory.
+
+
+# Usage
+
+Put **sharing_custom.html** in such **source/_layouts/post.html**,
+like:
+
+
+```diff
+ </p>
+ {% unless page.sharing == false %}
++{% unless site.share_official == false %}
+   {% include post/sharing.html %}
+ {% endunless %}
++{% if site.share_custom == true %}
++{% include post/sharing_custom.html %}
++{% endif %}
++{% endunless %}
+ <p class="meta">
+```
+
+And set your configuration in **_config.yml**:
+
+
+    # Choose method
+    share_official: false
+    share_custom: true
+    share_static: true
+    share_check_all: false
+
+    # Select shares
+    hatebu_button: true
+    twitter_button: true
+    googleplus_button: true
+    facebook_button: true
+    pocket_button: true
+    linkedin_button: false
+    stumble_button: false
+    pinterest_button: false
+    delicious_button: false
+
+For active mode, set `share_static: false`.
+
+For static mode, set `share_static: true`.
+
+You can set true or false for each button to be shown or not hidden.
+
+If `share_check_all` is enabled,
+the plugin gets numbers for all shares
+and store to the memory.
+But only buttons which are enabled are shown in **sharing_custom.html**.
+(Useful if you want to use in other places.)
+
