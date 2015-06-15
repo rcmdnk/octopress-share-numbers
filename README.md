@@ -32,11 +32,11 @@ There are three methods:
 * Custom buttons, getting numbers actively by JavaScript.
     * Copy **source/_includes/post/sharing_custom.html**.
     to your **source/_includes/post/**.
-    * Copy **source/javascripts/shareCustom.js** to your **soruce/javascripts/**.
+    * Copy **source/javascripts/share-custom.js** to your **soruce/javascripts/**.
 * Custom buttons, getting numbers statically by the plugin.
     * Copy **source/_includes/post/sharing_custom.html**.
     to your **source/_includes/post/**.
-    * Copy **plugins/share_numbers.rb** to your **plugins**.
+    * Copy **plugins/share-numbers.rb** to your **plugins**.
 
 Copy **sass/particals/_sharing.scss** to you **sass/particals/**.
 And put `@import "particals/sharing"` in you **sass/_partials.scss**.
@@ -44,9 +44,9 @@ And put `@import "particals/sharing"` in you **sass/_partials.scss**.
 # Usage
 
 
-Put **shareCustom.js** in **source/_includes/head.html**, after jQuery (**shareCustom.js** uses jQuery):
+Put **share-custom.js** in **source/_includes/head.html**, after jQuery (**share-custom.js** uses jQuery):
 
-    {%unless site.share_static%}<script src="{{root_url}}/javascripts/compressed/shareCustom.js"></script>{%endunless%}
+    {%unless site.share_static%}<script src="{{root_url}}/javascripts/compressed/share-custom.js"></script>{%endunless%}
 
 Put **sharing_custom.html** in such **source/_layouts/post.html**,
 like:
