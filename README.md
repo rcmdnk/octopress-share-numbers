@@ -12,7 +12,7 @@ Available social buttons are:
 * [LinkedIn](https://www.linkedin.com/)
 * [StumbleUpon](https://www.stumbleupon.com/)
 * [Pinterest](https://pinterest.com/)
-* [Buffer](https://buffer.com/) (not in shareing.html)
+* [Buffer](https://buffer.com/) (not in sharing.html)
 * [Delicious](https://delicious.com/) (currently count is not available)
 * [Tumblr](https://www.tumblr.com/) (Only button w/o cound)
 
@@ -38,8 +38,7 @@ There are three methods:
     to your **source/_includes/post/**.
     * Copy **plugins/share-numbers.rb** to your **plugins**.
 
-Copy **sass/particals/_sharing.scss** to you **sass/particals/**.
-And put `@import "particals/sharing"` in you **sass/_partials.scss**.
+Copy **sass/plugins/_share-numbers.scss** to you **sass/plugins/**.
 
 # Usage
 
