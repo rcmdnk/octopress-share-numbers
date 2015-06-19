@@ -75,7 +75,7 @@ $buffer-color: #000000;
 $delicious-color: #3399FF;
 $tumblr-color: #9DA6B0;
 
-.share-button {
+.posts .share-button, .share-button {
   @extend .group;
   margin-bottom:20px;
   ul {
