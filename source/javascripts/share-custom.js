@@ -89,15 +89,14 @@ $(function(){
     };
   };
   socialFunc.stumble = function(socialData, url){
-    socialData.url = '//www.stumbleupon.com/services/1.01/badge.getinfo';
-    socialData.data.url = url;
-    socialData.success = function(data){
-      $('.stumbleCount[data-share-url="'+url+'"]').text(data.result.views||0);
-      $('.stumbleCount[data-share-url="'+url+'"]').data("count",data.result.views||0);
-    };
-    socialData.error = function(data){
-      $('.stumbleCount[data-share-url="'+url+'"]').text(0);
-      $('.stumbleCount[data-share-url="'+url+'"]').data("count",0);
+    socialData.url = "//query.yahooapis.com/v1/public/yql";
+    socialData.data.q = "SELECT content FROM data.headers WHERE url='http://www.stumbleupon.com/services/1.01/badge.getinfo?url=" + url + "'";
+    socialData.data.format = "json";
+    socialData.data.env = "http://datatables.org/alltables.env";
+    socialData.success = function (data) {
+      var j = JSON.parse(data.query.results.resources.content);
+      $('.stumbleCount[data-share-url="'+url+'"]').text(j.result.views||0);
+      $('.stumbleCount[data-share-url="'+url+'"]').data("count",j.result.views||0);
     };
   };
   socialFunc.pinterest = function(socialData, url){
@@ -109,11 +108,14 @@ $(function(){
     };
   };
   socialFunc.buffer = function(socialData, url){
-    socialData.url = '//api.bufferapp.com/1/links/shares.json';
-    socialData.data.url = url;
-    socialData.success = function(data){
-      $('.bufferCount[data-share-url="'+url+'"]').text(data.shares||0);
-      $('.bufferCount[data-share-url="'+url+'"]').data("count",data.shares||0);
+    socialData.url = "//query.yahooapis.com/v1/public/yql";
+    socialData.data.q = "SELECT content FROM data.headers WHERE url='https://api.bufferapp.com/1/links/shares.json?url=" + url + "'";
+    socialData.data.format = "json";
+    socialData.data.env = "http://datatables.org/alltables.env";
+    socialData.success = function (data) {
+      var j = data.query.results.resources.content;
+      $('.bufferCount[data-share-url="'+url+'"]').text(j.shares||0);
+      $('.bufferCount[data-share-url="'+url+'"]').data("count",j.shares||0);
     };
   };
   socialFunc.delicious = function(socialData, url){
