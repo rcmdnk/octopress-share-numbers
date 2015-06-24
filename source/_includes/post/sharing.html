@@ -1,4 +1,10 @@
-{% if index %}{% capture share_url %}{{ site.url }}{{ post.url | remove:'index.html'}}{% endcapture %}{% capture share_title %}{{ post.title }}{% endcapture %}{% else %}{% capture share_url %}{{ site.url }}{{ page.url | remove:'index.html'}}{% endcapture %}{% capture share_title %}{{ page.title }}{% endcapture %}{% endif %}
+{% if post %}
+  {% assign p = post %}
+{% else %}
+  {% assign p = page %}
+{% endif %}
+{% capture share_url %}{{ site.url }}{{ p.url | remove:'index.html'}}{% endcapture %}
+{% capture share_title %}{{ p.title }}{% endcapture %}
 <div class="sharing">
   <ul>
     {% if site.hatebu_button %}
@@ -100,7 +106,7 @@
     </li>
     {% endif %}
     {% if site.tumblr_button %}
-    {% if index %}
+    {% if post %}
       {% capture description %}
         {% if post.description %}
           {{ post.description }}
