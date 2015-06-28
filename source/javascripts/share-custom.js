@@ -168,7 +168,7 @@ $(function(){
                "facebook", "pocket", "linkedin",
                "stumble", "pinterest", "buffer", "delicious"]
   for(var i=0;i<smarks.length;i++){
-    if(jekyll_var("share_all")||jekyll_var(smarks[i]+'_button'))socials.push(smarks[i]);
+    if(jekyll_var("share_check_all")||jekyll_var(smarks[i]+'_button'))socials.push(smarks[i]);
   }
   socialCount(socials);
 });

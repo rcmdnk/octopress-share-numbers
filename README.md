@@ -101,7 +101,7 @@ And set your configuration in **_config.yml**:
         - pinterest_button
         - buffer_button
         - delicious_button
-        - share_all
+        - share_check_all
 
 
 First, choose method:
