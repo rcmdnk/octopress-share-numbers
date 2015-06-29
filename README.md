@@ -16,13 +16,13 @@ Available social buttons are:
 * [Delicious](https://delicious.com/) (currently count is not available)
 * [Tumblr](https://www.tumblr.com/) (Only button w/o cound)
 
-# Requirement
+## Requirement
 
 To use active mode with JavaScript,
 please install
 [rcmdnk/jekyll-var-to-js](https://github.com/rcmdnk/jekyll-var-to-js), too.
 
-# Installation
+## Installation
 
 There are three methods:
 
@@ -40,7 +40,7 @@ There are three methods:
 
 Copy **sass/plugins/_share-numbers.scss** to you **sass/plugins/**.
 
-# Usage
+## Usage
 
 
 Put **share-custom.js** in **source/_includes/head.html**, after jQuery (**share-custom.js** uses jQuery):
