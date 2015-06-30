@@ -68,13 +68,13 @@ And set your configuration in **_config.yml**:
 
     # CPUs for parallel jobs
     n_cores: 4
-    
+
     # Choose method
     share_official: false
     share_custom: true
     share_static: true
     share_check_all: false
-    
+
     # Select shares
     hatebu_button: true
     twitter_button: true
@@ -87,7 +87,8 @@ And set your configuration in **_config.yml**:
     buffer_button: false
     delicious_button: false
     tumblr_button: false
-    
+    # share_all: true # to enable all
+
     # jekyll-var
     jekyll_var:
       include:
@@ -123,5 +124,7 @@ the plugin gets numbers for all shares
 and store to the memory.
 But only buttons which are enabled are shown in **sharing_custom.html**.
 (Useful if you want to use in other places.)
+
+If you want to show all buttons, use `share_all: true`.
 
 `n_cores` is used in the plugin, to decide how many threads should run.
