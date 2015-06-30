@@ -5,8 +5,19 @@
 {% endif %}
 {% capture share_url %}{{ site.url | uri_escape}}{{ p.url | uri_escape}}{% endcapture %}
 {% capture share_title %}{{ p.title }}{% endcapture %}
-{% capture n_views %}{% if p._pv %}{{ p._pv }}{% else %}0{% endif %}{% endcapture %}
 {% if site.share_all or page.share_all %}{% assign views = true %}{%elsif p.views_button != nil %}{% assign views = p.views_button %}{% else %}{% assign views = site.views_button %}{% endif %}
+{% if views %}
+  {% if site.views_periods or page.views_periods or p.views_periods %}
+    {% capture n_views1d %}{% if p._pv_1-day-ago-to-now %}{{p._pv_1-day-ago-to-now}}{% else %}0{% endif %}{% endcapture %}
+    {% capture n_views1w %}{% if p._pv_1-week-ago-to-now %}{{p._pv_1-week-ago-to-now}}{% else %}0{% endif %}{% endcapture %}
+    {% capture n_views1m %}{% if p._pv_1-month-ago-to-now %}{{p._pv_1-month-ago-to-now}}{% else %}0{% endif %}{% endcapture %}
+    {% capture n_views1y %}{% if p._pv_1-year-ago-to-now %}{{p._pv_1-year-ago-to-now}}{% else %}0{% endif %}{% endcapture %}
+    {% capture n_views10y %}{% if p._pv_10-years-ago-to-now %}{{p._pv_10-years-ago-to-now}}{% else %}0{% endif %}{% endcapture %}
+  {% else %}
+    {% capture n_views %}{% if p._pv %}{{ p._pv }}{% else %}0{% endif %}{% endcapture %}
+  {% endif %}
+{% endif %}
+
 {% if site.share_all or page.share_all %}{% assign hatebu = true %}{%elsif p.hatebu_button != nil %}{% assign hatebu = p.hatebu_button %}{% else %}{% assign hatebu = site.hatebu_button %}{% endif %}
 {% if site.share_all or page.share_all %}{% assign twitter = true %}{%elsif p.twitter_button != nil %}{% assign twitter = p.twitter_button %}{% else %}{% assign twitter = site.twitter_button %}{% endif %}
 {% if site.share_all or page.share_all %}{% assign googleplus = true %}{%elsif p.googleplus_button != nil %}{% assign googleplus = p.googleplus_button %}{% else %}{% assign googleplus = site.googleplus_button %}{% endif %}
@@ -17,14 +28,34 @@
 {% if site.share_all or page.share_all %}{% assign pinterest = true %}{%elsif p.pinterest_button != nil %}{% assign pinterest = p.pinterest_button %}{% else %}{% assign pinterest = site.pinterest_button %}{% endif %}
 {% if site.share_all or page.share_all %}{% assign buffer = true %}{%elsif p.buffer_button != nil %}{% assign buffer = p.buffer_button %}{% else %}{% assign buffer = site.buffer_button %}{% endif %}
 {% if site.share_all or page.share_all %}{% assign delicious = true %}{%elsif p.delicious_button != nil %}{% assign delicious = p.delicious_button %}{% else %}{% assign delicious = site.delicious_button %}{% endif %}
+{% unless site.share_number or page.share_number or p.share_number %}
 {% if site.share_all or page.share_all %}{% assign tumblr = true %}{%elsif p.tumblr_button != nil %}{% assign tumblr = p.tumblr_button %}{% else %}{% assign tumblr = site.tumblr_button %}{% endif %}
+{% endunless %}
 
 <div class="share-button">
   <ul>
     {% if views %}
+    {% if site.views_periods or page.views_periods or p.views_periods %}
+    <li><a href="{{share_url}}"
+    title="1 day views by Analytics"
+    target="_blank"><p class="views1d_custom" >1d <span class="views1dCount" data-share-url="{{share_url}}" data-count="{{n_views1d}}">{{n_views1d}}</span></p></a></li>
+    <li><a href="{{share_url}}"
+    title="1 week views by Analytics"
+    target="_blank"><p class="views1w_custom" >1w <span class="views1wCount" data-share-url="{{share_url}}" data-count="{{n_views1w}}">{{n_views1w}}</span></p></a></li>
+    <li><a href="{{share_url}}"
+    title="1 month views by Analytics"
+    target="_blank"><p class="views1m_custom" >1m <span class="views1mCount" data-share-url="{{share_url}}" data-count="{{n_views1m}}">{{n_views1m}}</span></p></a></li>
+    <li><a href="{{share_url}}"
+    title="1 year views by Analytics"
+    target="_blank"><p class="views1y_custom" >1y <span class="views1yCount" data-share-url="{{share_url}}" data-count="{{n_views1y}}">{{n_views1y}}</span></p></a></li>
+    <li><a href="{{share_url}}"
+    title="10 years views by Analytics"
+    target="_blank"><p class="views10y_custom" >10y <span class="views10yCount" data-share-url="{{share_url}}" data-count="{{n_views10y}}">{{n_views10y}}</span></p></a></li>
+    {% else %}
     <li><a href="{{share_url}}"
     title="Views by Analytics"
     target="_blank"><p class="views_custom" >View <span class="viewsCount" data-share-url="{{share_url}}">{{n_views}} </span></p></a></li>
+    {% endif %}
     {% endif %}
     {% if hatebu %}
     <li><a href="http://b.hatena.ne.jp/entry/{{share_url}}"

@@ -95,7 +95,7 @@ module Jekyll
     end
 
     def method_missing(method, *args)
-      return nil
+      nil
     end
 
     def get_shares(page, config, m)
