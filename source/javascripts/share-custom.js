@@ -7,15 +7,13 @@ $(function(){
       socialData.data.format = "json";
       socialData.data.env = "http://datatables.org/alltables.env";
       socialData.success = function (data) {
-        $('.hatebuCount[data-share-url="'+url+'"]').text(data.query.results.resources.content||0);
-        $('.hatebuCount[data-share-url="'+url+'"]').data("count",data.query.results.resources.content||0);
+        socialData.socialPush(data.query.results.resources.content);
       };
     }else{
       socialData.url = 'http://api.b.st-hatena.com/entry.count';
       socialData.data.url = url;
       socialData.success = function(data){
-        $('.hatebuCount[data-share-url="'+url+'"]').text(data||0);
-        $('.hatebuCount[data-share-url="'+url+'"]').data("count",data||0);
+        socialData.socialPush(data);
       };
     }
   };
@@ -23,8 +21,7 @@ $(function(){
     socialData.url = '//urls.api.twitter.com/1/urls/count.json';
     socialData.data.url = url;
     socialData.success = function(data){
-      $('.twitterCount[data-share-url="'+url+'"]').text(data.count||0);
-      $('.twitterCount[data-share-url="'+url+'"]').data("count",data.count||0);
+      socialData.socialPush(data.count);
     };
   };
   socialFunc.googleplus = function(socialData, url){
@@ -34,8 +31,7 @@ $(function(){
     socialData.data.env = "http://datatables.org/alltables.env";
     socialData.success = function (data) {
       var m = data.query.results.resources.content.match(/window\.__SSR = {c: ([\d]+)/);
-      $('.googleplusCount[data-share-url="'+url+'"]').text((m != null)? m[1] : 0);
-      $('.googleplusCount[data-share-url="'+url+'"]').data("count",(m != null)? m[1] : 0);
+      socialData.socialPush((m != null)? m[1] : 0);
     };
   };
   socialFunc.facebook = function(socialData, url){
@@ -54,8 +50,7 @@ $(function(){
           },
           success: function(data) {
             n += data.data[0].total_count;
-            $('.facebookCount[data-share-url="'+url+'"]').text(n);
-            $('.facebookCount[data-share-url="'+url+'"]').data("count",n);
+            socialData.socialPush(n);
           },
           error: function(data){
             console.log('Error to get facebook count by fql');
@@ -63,8 +58,7 @@ $(function(){
         };
         $.ajax(fdata);
       }else{
-        $('.facebookCount[data-share-url="'+url+'"]').text(data.shares||0);
-        $('.facebookCount[data-share-url="'+url+'"]').data("count",data.shares||0);
+        socialData.socialPush(data.shares);
       }
     };
   };
@@ -74,18 +68,14 @@ $(function(){
     socialData.data.format = "json";
     socialData.data.env = "http://datatables.org/alltables.env";
     socialData.success = function (data) {
-      //$('.pocketCount[data-share-url="'+url+'"]').text(data.toSource());
-      //$('.pocketCount[data-share-url="'+url+'"]').data("count",data.toSource());
-      $('.pocketCount[data-share-url="'+url+'"]').text(data.query.results.resources.content.match(/<em id="cnt">(\d+)<\/em>/)[1]||0);
-      $('.pocketCount[data-share-url="'+url+'"]').data("count",data.query.results.resources.content.match(/<em id="cnt">(\d+)<\/em>/)[1]||0);
+      socialData.socialPush(data.query.results.resources.content.match(/<em id="cnt">(\d+)<\/em>/)[1]);
     };
   };
   socialFunc.linkedin = function(socialData, url){
     socialData.url = '//www.linkedin.com/countserv/count/share';
     socialData.data.url = url;
     socialData.success = function(data){
-      $('.linkedinCount[data-share-url="'+url+'"]').text(data.count||0);
-      $('.linkedinCount[data-share-url="'+url+'"]').data("count",data.count||0);
+      socialData.socialPush(data.count);
     };
   };
   socialFunc.stumble = function(socialData, url){
@@ -95,16 +85,18 @@ $(function(){
     socialData.data.env = "http://datatables.org/alltables.env";
     socialData.success = function (data) {
       var j = JSON.parse(data.query.results.resources.content);
-      $('.stumbleCount[data-share-url="'+url+'"]').text(j.result.views||0);
-      $('.stumbleCount[data-share-url="'+url+'"]').data("count",j.result.views||0);
+      var n = 0;
+      if(j != undefined && j.result != undefined){
+        n = j.result.views || 0;
+      }
+      socialData.socialPush(n);
     };
   };
   socialFunc.pinterest = function(socialData, url){
     socialData.url = '//api.pinterest.com/v1/urls/count.json';
     socialData.data.url = url;
     socialData.success = function(data){
-      $('.pinterestCount[data-share-url="'+url+'"]').text(data.count||0);
-      $('.pinterestCount[data-share-url="'+url+'"]').data("count",data.count||0);
+      socialData.socialPush(data.count);
     };
   };
   socialFunc.buffer = function(socialData, url){
@@ -114,21 +106,33 @@ $(function(){
     socialData.data.env = "http://datatables.org/alltables.env";
     socialData.success = function (data) {
       var j = data.query.results.resources.content;
-      $('.bufferCount[data-share-url="'+url+'"]').text(j.shares||0);
-      $('.bufferCount[data-share-url="'+url+'"]').data("count",j.shares||0);
+      socialData.socialPush(data.query.results.resources.content.shares);
     };
   };
   socialFunc.delicious = function(socialData, url){
     socialData.url = '//feeds.delicious.com/v2/json/urlinfo/data';
     socialData.data.url = url;
     socialData.success = function(data){
-      $('.deliciousCount[data-share-url="'+url+'"]').text((data.length>0)? data[0].total_posts : 0);
-      $('.deliciousCount[data-share-url="'+url+'"]').data("count",(data.length>0)? data[0].total_posts : 0);
+      socialData.socialPush((data.length>0)? data[0].total_posts : 0);
     };
   };
 });
 
 var socialCount = function (socials) {
+  var bar = document.getElementById("bar-get-shares");
+  var num = document.getElementById("num-get-shares");
+  if(bar != null && num != null){
+    var max = socials.length * document.getElementsByClassName(socials[0]+"Count").length;
+    bar.value = 0;
+    bar.max = max;
+    num.innerHTML = "0 %";
+  }
+  var barForward = function () {
+    if(bar == null || num == null)return;
+    bar.value +=1;
+    num.innerHTML = Math.floor(100*bar.value/bar.max) + " %";
+  };
+  social_ajax = [];
   socials.forEach(function(s){
     var urls = [];
     var n = 0;
@@ -142,10 +146,18 @@ var socialCount = function (socials) {
           data: {noncache: new Date().getTime()},
           error: function(data){
             console.log('Error to get ' + s);
+          },
+          barForward: barForward,
+          socialPush: function(n) {
+            var n = Number(n);
+            if(isNaN(n))n=0;
+            $('.'+s+'Count[data-share-url="'+url+'"]').text(n);
+            $('.'+s+'Count[data-share-url="'+url+'"]').data("count",n);
+            socialData.barForward();
           }
         };
         socialFunc[s](socialData, url);
-        $.ajax(socialData);
+        social_ajax.push($.ajax(socialData));
       }
       var pos = n;
       if(n==0){
@@ -159,6 +171,18 @@ var socialCount = function (socials) {
       n++;
     });
   });
+  $.when.apply(null, social_ajax).done(function() {
+    socials.forEach(function(s){
+      var tot = 0;
+      $("."+s+"Count").each(function(){
+        var n = $(this).data("count");
+        //console.log(n);
+        tot += n;
+      });
+      //console.log("total of " + s + ": " + tot);
+      $("#" + s + "_tot").html(tot);
+    });
+  });
 };
 
 $(function(){
@@ -166,7 +190,7 @@ $(function(){
   var socials=[];
   var smarks = ["hatebu", "twitter", "googleplus",
                "facebook", "pocket", "linkedin",
-               "stumble", "pinterest", "buffer", "delicious"]
+               "stumble", "pinterest", "buffer", "delicious"];
   for(var i=0;i<smarks.length;i++){
     if(jekyll_var("share_check_all")||jekyll_var(smarks[i]+'_button'))socials.push(smarks[i]);
   }
