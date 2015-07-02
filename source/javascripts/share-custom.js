@@ -119,45 +119,35 @@ $(function(){
 });
 
 var socialCount = function (socials) {
-  var bar = document.getElementById("bar-get-shares");
-  var num = document.getElementById("num-get-shares");
-  if(bar != null && num != null){
-    var max = socials.length * document.getElementsByClassName(socials[0]+"Count").length;
-    bar.value = 0;
-    bar.max = max;
-    num.innerHTML = "0 %";
-  }
-  var barForward = function () {
-    if(bar == null || num == null)return;
-    bar.value +=1;
-    num.innerHTML = Math.floor(100*bar.value/bar.max) + " %";
-  };
-  social_ajax = [];
+  social_data_box = [];
   socials.forEach(function(s){
     var urls = [];
     var n = 0;
     $("."+s+"Count").each(function(){
       var url = $(this).attr("data-share-url");
-      if ($.inArray(url, urls) == -1){
-        urls.push(url);
-        socialData = {
-          type: 'GET',
-          dataType: 'jsonp',
-          data: {noncache: new Date().getTime()},
-          error: function(data){
-            console.log('Error to get ' + s);
-          },
-          barForward: barForward,
-          socialPush: function(n) {
-            var n = Number(n);
-            if(isNaN(n))n=0;
-            $('.'+s+'Count[data-share-url="'+url+'"]').text(n);
-            $('.'+s+'Count[data-share-url="'+url+'"]').data("count",n);
-            socialData.barForward();
-          }
-        };
-        socialFunc[s](socialData, url);
-        social_ajax.push($.ajax(socialData));
+      if($('.'+s+'Count[data-share-url="'+url+'"]').text() == ""){
+        if ($.inArray(url, urls) == -1){
+          urls.push(url);
+          socialData = {
+            type: 'GET',
+            dataType: 'jsonp',
+            data: {noncache: new Date().getTime()},
+            socialData: void(0),
+            error: function(data){
+              console.log('Error to get ' + s);
+              socialData.barForward();
+            },
+            socialPush: function(n) {
+              var n = Number(n);
+              if(isNaN(n))n=0;
+              $('.'+s+'Count[data-share-url="'+url+'"]').text(n);
+              $('.'+s+'Count[data-share-url="'+url+'"]').data("count",n);
+              socialData.barForward();
+            }
+          };
+          socialFunc[s](socialData, url);
+          social_data_box.push(socialData);
+        }
       }
       var pos = n;
       if(n==0){
@@ -171,7 +161,24 @@ var socialCount = function (socials) {
       n++;
     });
   });
-  $.when.apply(null, social_ajax).done(function() {
+  var bar = document.getElementById("bar-get-shares");
+  var num = document.getElementById("num-get-shares");
+  if(bar != null && num != null){
+    bar.value = 0;
+    bar.max = social_data_box.length;
+    num.innerHTML = "0 %";
+  }
+  var barForward = function () {
+    if(bar == null || num == null)return;
+    bar.value +=1;
+    num.innerHTML = Math.floor(100*bar.value/bar.max) + " %";
+  };
+  var social_ajax = [];
+  social_data_box.forEach(function(d){
+    d.barForward = barForward;
+    social_ajax.push($.ajax(d));
+  });
+  $.when.apply($, social_ajax).always(function() {
     socials.forEach(function(s){
       var tot = 0;
       $("."+s+"Count").each(function(){
