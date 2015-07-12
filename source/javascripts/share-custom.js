@@ -155,9 +155,11 @@ var socialCount = function (socials) {
       }else if(n==1){
         pos = "bottom";
       }
-      $(this).parent().on('click', function() {
-        ga('send', 'event', s, pos, url);
-      });
+      if((! "jekyll_var" in window) || (! jekyll_var("share_no_ga"))){
+        $(this).parent().on('click', function() {
+          ga('send', 'event', s, pos, url);
+        });
+      }
       n++;
     });
   });
@@ -199,7 +201,9 @@ $(function(){
                "facebook", "pocket", "linkedin",
                "stumble", "pinterest", "buffer", "delicious"];
   for(var i=0;i<smarks.length;i++){
-    if(jekyll_var("share_check_all")||jekyll_var(smarks[i]+'_button'))socials.push(smarks[i]);
+    if(jekyll_var("share_check_all")||jekyll_var(smarks[i]+'_button')){
+      socials.push(smarks[i]);
+    }
   }
   socialCount(socials);
 });
