@@ -122,10 +122,10 @@ var socialCount = function (socials) {
   social_data_box = [];
   socials.forEach(function(s){
     var urls = [];
-    var n = 0;
+    var p = 0;
     $("."+s+"Count").each(function(){
       var url = $(this).attr("data-share-url");
-      if($('.'+s+'Count[data-share-url="'+url+'"]').text() == ""){
+      if($(this).text() == ""){
         if ($.inArray(url, urls) == -1){
           urls.push(url);
           socialData = {
@@ -149,10 +149,10 @@ var socialCount = function (socials) {
           social_data_box.push(socialData);
         }
       }
-      var pos = n;
-      if(n==0){
+      var pos = String(p);
+      if(p==0){
         pos = "above";
-      }else if(n==1){
+      }else if(p==1){
         pos = "bottom";
       }
       if((! "jekyll_var" in window) || (! jekyll_var("share_no_ga"))){
@@ -160,7 +160,7 @@ var socialCount = function (socials) {
           ga('send', 'event', s, pos, url);
         });
       }
-      n++;
+      p++;
     });
   });
   var bar = document.getElementById("bar-get-shares");
