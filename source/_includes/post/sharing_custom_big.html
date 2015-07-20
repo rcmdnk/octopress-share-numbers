@@ -1,0 +1,88 @@
+{% if post %}
+  {% assign p = post %}
+{% else %}
+  {% assign p = page %}
+{% endif %}
+{% capture share_url %}{{ site.url | uri_escape}}{{ p.url | uri_escape}}{% endcapture %}
+{% capture share_title %}{{ p.title }}{% endcapture %}
+{% if site.share_all or page.share_all %}{% assign hatebu = true %}{%elsif p.hatebu_button != nil %}{% assign hatebu = p.hatebu_button %}{% else %}{% assign hatebu = site.hatebu_button %}{% endif %}
+{% if site.share_all or page.share_all %}{% assign twitter = true %}{%elsif p.twitter_button != nil %}{% assign twitter = p.twitter_button %}{% else %}{% assign twitter = site.twitter_button %}{% endif %}
+{% if site.share_all or page.share_all %}{% assign googleplus = true %}{%elsif p.googleplus_button != nil %}{% assign googleplus = p.googleplus_button %}{% else %}{% assign googleplus = site.googleplus_button %}{% endif %}
+{% if site.share_all or page.share_all %}{% assign facebook = true %}{%elsif p.facebook_button != nil %}{% assign facebook = p.facebook_button %}{% else %}{% assign facebook = site.facebook_button %}{% endif %}
+{% if site.share_all or page.share_all %}{% assign pocket = true %}{%elsif p.pocket_button != nil %}{% assign pocket = p.pocket_button %}{% else %}{% assign pocket = site.pocket_button %}{% endif %}
+{% if site.share_all or page.share_all %}{% assign linkedin = true %}{%elsif p.linkedin_button != nil %}{% assign linkedin = p.linkedin_button %}{% else %}{% assign linkedin = site.linkedin_button %}{% endif %}
+{% if site.share_all or page.share_all %}{% assign stumble = true %}{%elsif p.stumble_button != nil %}{% assign stumble = p.stumble_button %}{% else %}{% assign stumble = site.stumble_button %}{% endif %}
+{% if site.share_all or page.share_all %}{% assign pinterest = true %}{%elsif p.pinterest_button != nil %}{% assign pinterest = p.pinterest_button %}{% else %}{% assign pinterest = site.pinterest_button %}{% endif %}
+{% if site.share_all or page.share_all %}{% assign buffer = true %}{%elsif p.buffer_button != nil %}{% assign buffer = p.buffer_button %}{% else %}{% assign buffer = site.buffer_button %}{% endif %}
+{% if site.share_all or page.share_all %}{% assign delicious = true %}{%elsif p.delicious_button != nil %}{% assign delicious = p.delicious_button %}{% else %}{% assign delicious = site.delicious_button %}{% endif %}
+{% unless site.share_number or page.share_number or p.share_number %}
+{% if site.share_all or page.share_all %}{% assign tumblr = true %}{%elsif p.tumblr_button != nil %}{% assign tumblr = p.tumblr_button %}{% else %}{% assign tumblr = site.tumblr_button %}{% endif %}
+{% endunless %}
+{% if site.share_all or page.share_all %}{% assign feedly = true %}{%elsif p.feedly_button != nil %}{% assign feedly = p.feedly_button %}{% else %}{% assign feedly = site.feedly_button %}{% endif %}
+
+<div class="share-button share-big">
+  <ul>
+    {% if hatebu %}
+    <li><a href="http://b.hatena.ne.jp/entry/{{share_url}}"
+    title="Save to Hatebu"
+    target="_blank"><p class="hatebu_custom" data-share-url="{{share_url}}">{{site.share_big.hatebu}}</p></a></li>
+    {% endif %}
+    {% if twitter %}
+    <li><a href="http://twitter.com/intent/tweet?text={{share_title}}&url={{share_url}}&via={{site.author}}"
+    title="Share on Twitter"
+    target="_blacnk"><p class="twitter_custom" data-share-url="{{share_url}}">{{site.share_big.twitter}}</p></a></li>
+    {% endif %}
+    {% if googleplus %}
+    <li><a href="https://plus.google.com/share?url={{share_url}}&title={{share_title}}"
+    title="Share on Google+"
+    target="_blank"><p class="googleplus_custom"  data-share-url="{{share_url}}">{{site.share_big.googleplus}}</p></a></li>
+    {% endif %}
+    {% if facebook %}
+    <li><a href="http://www.facebook.com/sharer.php?src=bm&u={{share_url}}&amp;t={{share_title}}"
+    title="Share on Facebook"
+    target="_blank"><p class="facebook_custom" data-share-url="{{share_url}}">{{site.share_big.facebook}}</p></a></li>
+    {% endif %}
+    {% if pocket %}
+    <li><a href="http://getpocket.com/edit?url={{share_url}}&title={{share_title}}"
+    title="Save to Pocket"
+    target="_blank"><p class="pocket_custom" data-share-url="{{share_url}}">{{site.share_big.pocket}}</p></a></li>
+    {% endif %}
+    {% if linkedin %}
+    <li><a href="http://www.linkedin.com/shareArticle?mini=true&url={{share_url}}&title={{share_title}}&source={{site.author}}"
+    title="Share on LinkedIn"
+    target="_blank"><p class="linkedin_custom" data-share-url="{{share_url}}">{{site.share_big.linkedin}}</p></a></li>
+    {% endif %}
+    {% if stumble %}
+    <li><a href="http://www.stumbleupon.com/badge/?url={{share_url}}&title={{share_title}}"
+    title="Save to StumbleUpon"
+    target="_blank"><p class="stumble_custom" data-share-url="{{share_url}}">{{site.share_big.stumble}}</p></a></li>
+    {% endif %}
+    {% if pinterest %}
+    <li><a href="http://pinterest.com/pin/create/button/?url={{share_url}}&title={{share_title}}"
+    title="Save to Pinterest"
+    target="_blank"><p class="pinterest_custom" data-share-url="{{share_url}}">{{site.share_big.pinterest}}</p></a></li>
+    {% endif %}
+    {% if buffer %}
+    <li><a href="https://api.bufferapp.com/1/links/shares.json?url={{share_url}}&title={{share_title}}"
+    title="Save to buffer"
+    target="_blank"><p class="buffer_custom" data-share-url="{{share_url}}">{{site.share_big.buffer}}</p></a></li>
+    {% endif %}
+    {% if delicious %}
+    <li><a href="https://delicious.com/save?v=5&provider={{site.author}}&noui&jump=close&url={{share_url}}&title={{share_title}}"
+    title="Save to Delicious"
+    target="_blank"><p class="delicious_custom" data-share-url="{{share_url}}">{{site.share_big.delicious}}</p></a></li>
+    {% endif %}
+    {% if tumblr %}
+    {% capture description %}{% if p.description %}{{ p.description }}{% endif %}{% endcapture %}
+    {% capture description %}{{ description | strip_html | codense_spaces | truncate:150 }}{% endcapture %}
+    <li><a
+    href="http://www.tumblr.com/share/link?url={{share_url|cgi_escape}}&name={{share_title|cgi_escape}}&description={{description|cgi_escape}}"
+    title="Share on Tumblr"
+    target="_blank"><p class="tumblr_custom" data-share-url="{{share_url}}">{{site.share_big.tumblr}}</p></a></li>
+    {% endif %}
+    {% if feedly %}
+    <li><a href='http://feedly.com/i/subscription/feed/{{site.url}}{{site.subscribe_rss}}' title="Follow with feedly"
+    target="_blank"><p class="feedly_custom" data-share-url="{{share_url}}">{{site.share_big.feedly}}</p></a></li>
+    {% endif %}
+  </ul>
+</div>

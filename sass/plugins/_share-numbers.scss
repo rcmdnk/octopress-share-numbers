@@ -86,6 +86,7 @@ $feedly-color: #6CC655;
     display: block;
     margin-bottom: 1.5em;
     p {
+      text-align: center;
       border: solid 1px;
       border-radius: 3px;
       float: left;
@@ -248,19 +249,16 @@ $feedly-color: #6CC655;
     }
   }
 }
-.share-big {
-  span {
-    text-align: center;
-    float: left;
-    color: #FFFFFF;
-    width: 100%;
+.share-button.share-big {
+  p {
+    width: 90%;
     font-size: 20px;
-    font-weight: bold;
-    font-family: $header-subtitle-font-family;
-    color: #FFFFFF;
-    &:hover {color: darken(#FFFFFF, 10);}
-    @media only screen and (min-width: 550px) {
-      width: 50%;
+    height: 30px;
+    margin-bottom: 2px;
+    text-decoration: underline;
+    padding: 5px 15px 0px;
+    @media only screen and (min-width: 992px) {
+      width: 43%;
     }
   }
 }
