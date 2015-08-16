@@ -80,7 +80,7 @@
     {% if pocket %}
     <li><a href="http://getpocket.com/edit?url={{share_url}}&title={{share_title}}"
     title="Save to Pocket"
-    target="_blank"><p  class="pocket_custom">P <span class="pocketCount" data-share-url="{{share_url}}" data-count="{{p.pocketCount}}">{{p.pocketCount}}</span></p></a></li>
+    target="_blank"><p  class="pocket_custom"><i class="fa fa-get-pocket"></i> <span class="pocketCount" data-share-url="{{share_url}}" data-count="{{p.pocketCount}}">{{p.pocketCount}}</span></p></a></li>
     {% endif %}
     {% if linkedin %}
     <li><a href="http://www.linkedin.com/shareArticle?mini=true&url={{share_url}}&title={{share_title}}&source={{site.author}}"
