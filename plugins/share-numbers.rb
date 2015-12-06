@@ -43,7 +43,7 @@ module Jekyll
 
     def get_twitter(url)
       #get_number('http://urls.api.twitter.com/1/urls/count.json?url=' + url, 'json', 'count').to_i
-      get_number('http://jsoon.digitiminimi.com/twitter/count.json?url= ' + url, 'json', 'count').to_i
+      get_number('http://jsoon.digitiminimi.com/twitter/count.json?url=' + url, 'json', 'count').to_i
     end
 
     def get_googleplus(url)
