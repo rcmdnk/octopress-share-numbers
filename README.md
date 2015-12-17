@@ -22,6 +22,16 @@ To use active mode with JavaScript,
 please install
 [rcmdnk/jekyll-var-to-js](https://github.com/rcmdnk/jekyll-var-to-js), too.
 
+Update 17/Dec/2015:
+
+Twitter's API is no longer available.
+In octopress-share-number, currently
+[count.jsoon](http://jsoon.digitiminimi.com/) is used instead of Twitter's API.
+
+To enable count.jsoon, please register your URL from
+[here](http://jsoon.digitiminimi.com/),
+then counts will be available in a few days.
+
 ## Installation
 
 There are three methods:
