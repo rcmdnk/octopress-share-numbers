@@ -18,7 +18,8 @@ $(function(){
     }
   };
   socialFunc.twitter = function(socialData, url){
-    socialData.url = '//urls.api.twitter.com/1/urls/count.json';
+    //socialData.url = '//urls.api.twitter.com/1/urls/count.json';
+    socialData.url = '//jsoon.digitiminimi.com/twitter/count.json';
     socialData.data.url = url;
     socialData.success = function(data){
       socialData.socialPush(data.count);
