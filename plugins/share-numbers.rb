@@ -53,11 +53,7 @@ module Jekyll
 
     def get_facebook(url)
       h = get_number('https://graph.facebook.com/?id=' + url, 'jsonfull')
-      if h.key?('likes')
-        h['likes'].to_i + get_number('http://graph.facebook.com/fql?q=SELECT%20total_count%20FROM%20link_stat%20WHERE%20url="' + url + '"', 'jsonfull')['data'][0]["total_count"].to_i
-      else
-        h['shares'].to_i
-      end
+      h['share']["share_count"].to_i
     end
 
     def get_pocket(url)

@@ -39,28 +39,7 @@ $(function(){
     socialData.url = '//graph.facebook.com/';
     socialData.data.id = url;
     socialData.success = function(data){
-      if('likes' in data){
-        var n = data.likes;
-        var fdata = {
-          type: 'GET',
-          dataType: 'jsonp',
-          url: '//graph.facebook.com/fql',
-          data: {
-            noncache: new Date().getTime(),
-            q: "SELECT total_count FROM link_stat WHERE url='" + url + "'"
-          },
-          success: function(data) {
-            n += data.data[0].total_count;
-            socialData.socialPush(n);
-          },
-          error: function(data){
-            console.log('Error to get facebook count by fql');
-          }
-        };
-        $.ajax(fdata);
-      }else{
-        socialData.socialPush(data.shares);
-      }
+      socialData.socialPush(data.share.share_count);
     };
   };
   socialFunc.pocket = function(socialData, url){
