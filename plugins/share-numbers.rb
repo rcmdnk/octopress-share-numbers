@@ -53,7 +53,11 @@ module Jekyll
 
     def get_facebook(url)
       h = get_number('https://graph.facebook.com/?id=' + url, 'jsonfull')
-      h['share']["share_count"].to_i
+      if h.key?('share')
+        h['share']["share_count"].to_i
+      else
+        0
+      end
     end
 
     def get_pocket(url)
