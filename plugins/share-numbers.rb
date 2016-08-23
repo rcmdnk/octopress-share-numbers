@@ -53,7 +53,7 @@ module Jekyll
 
     def get_facebook(url)
       h = get_number('https://graph.facebook.com/?id=' + url, 'jsonfull')
-      if h.key?('share')
+      if h.class == Hash and h.key?('share')
         h['share']["share_count"].to_i
       else
         0
