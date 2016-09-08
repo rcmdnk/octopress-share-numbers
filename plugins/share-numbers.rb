@@ -37,39 +37,44 @@ module Jekyll
       end
     end
 
-    def get_hatebu(url)
+    def get_hatebu(url, config)
       get_number('http://api.b.st-hatena.com/entry.count?url=' + url).to_i
     end
 
-    def get_twitter(url)
+    def get_twitter(url, config)
       #get_number('http://urls.api.twitter.com/1/urls/count.json?url=' + url, 'json', 'count').to_i
       get_number('http://jsoon.digitiminimi.com/twitter/count.json?url=' + url, 'json', 'count').to_i
     end
 
-    def get_googleplus(url)
+    def get_googleplus(url, config)
       get_number('https://plusone.google.com/_/+1/fastbutton?url=' + url,
                  'html', /window\.__SSR = {c: ([\d]+)/).to_i
     end
 
-    def get_facebook(url)
-      h = get_number('https://graph.facebook.com/?id=' + url, 'jsonfull')
-      if h.class == Hash and h.key?('share')
-        h['share']["share_count"].to_i
+    def get_facebook(url, config)
+      if config.include?("facebook_shares") and config["facebook_shares"].include?(url)
+        config["facebook_shares"][url]
       else
         0
       end
+      #h = get_number('https://graph.facebook.com/?id=' + url, 'jsonfull')
+      #if h.class == Hash and h.key?('share')
+      #  h['share']["share_count"].to_i
+      #else
+      #  0
+      #end
     end
 
-    def get_pocket(url)
+    def get_pocket(url, config)
       get_number('https://widgets.getpocket.com/v1/button?label=pocket&count=vertical&v=1&url=' + url,
                  'html', /<em id="cnt">(\d+)<\/em>/).to_i
     end
 
-    def get_linkedin(url)
+    def get_linkedin(url, config)
       get_number('https://www.linkedin.com/countserv/count/share?format=json&url=' + url, 'json', 'count').to_i
     end
 
-    def get_stumble(url)
+    def get_stumble(url, config)
       h = get_number('https://www.stumbleupon.com/services/1.01/badge.getinfo?url=' + url, 'jsonfull')
       begin
         h['result']['views'].to_i
@@ -78,20 +83,59 @@ module Jekyll
       end
     end
 
-    def get_pinterest(url)
+    def get_pinterest(url, config)
       get_number('https://api.pinterest.com/v1/urls/count.json?url=' + url, 'json', 'count', ['receiveCount(',')']).to_i
     end
 
-    def get_buffer(url)
+    def get_buffer(url, config)
       get_number('https://api.bufferapp.com/1/links/shares.json?url=' + url, 'json', 'shares').to_i
     end
 
-    def get_delicious(url)
+    def get_delicious(url, config)
       h = get_number('https://feeds.delicious.com/v2/json/urlinfo/data?url=' + url, 'jsonfull')
       begin
         h[0]['total_posts'].to_i
       rescue
         0
+      end
+    end
+
+    def make_facebook_list(config)
+      is_facebook = true
+      if not config['share_check_all'] or not config.include?("url_list")
+        return false
+      end
+      begin
+        open(config["url"] + "/facebook_shares.html") do |f|
+          content = f.read
+          config["facebook_shares"] = JSON.parse(f.read)
+        end
+        url_list = open(config["url"] + "/" + config["url_list"]).split().sort
+        config["facebook_shares"].include?("last_n")? i = config["facebook_shares"]["last_n"] : i = 0
+        n = 0
+        while true
+          url = url_list[i]
+          h = get_number('https://graph.facebook.com/?id=' + url, 'jsonfull')
+          p h
+          if h.class == Hash and h.key?('share')
+            config["facebook_shares"][url] = h['share']["share_count"].to_i
+          else
+            break
+          end
+          i += 1
+          n += 1
+          if i == url_list.size
+            i = 0
+          end
+          if n == url_list.size
+            break
+          end
+        end
+        config["facebook_shares"]["last_n"] = i
+        p config["facebook_shares"]
+        true
+      rescue
+        false
       end
     end
 
@@ -109,15 +153,13 @@ module Jekyll
       shares.each do |button|
         name = button.sub('_button', '')
         count = name + 'Count'
-        n = self.send('get_' + name, url)
-        if n != nil
-          m.synchronize do
-            page.data.merge!(count => n)
-            if config[count]
-              config[count] += n
-            else
-              config[count] = n
-            end
+        n != nil ?  n = self.send('get_' + name, url, config) : n = 0
+        m.synchronize do
+          page.data[count] = n
+          if config[count]
+            config[count] += n
+          else
+            config[count] = n
           end
         end
       end
@@ -127,6 +169,9 @@ module Jekyll
       if !site.config['share_static'] or (!site.config['share_official'] and !site.config['share_custom'])
         return
       end
+
+      make_facebook_list(site.config)
+      put site.config["facebook_shares"]
 
       m = Mutex.new
       Parallel.map([site.posts, site.pages].flatten, :in_threads => site.config['n_cores'] ? site.config['n_cores'] : 1) do |page_or_post|

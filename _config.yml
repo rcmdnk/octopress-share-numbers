@@ -20,6 +20,8 @@ buffer_button: false
 delicious_button: false
 tumblr_button: false
 
+url_list: "urllist.html"
+
 # jekyll-var
 jekyll_var:
   include:

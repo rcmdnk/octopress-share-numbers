@@ -46,9 +46,15 @@ There are three methods:
 * Custom buttons, getting numbers statically by the plugin.
     * Copy **source/_includes/post/sharing_custom.html**.
     to your **source/_includes/post/**.
+    * Copy **source/facebook_shares.html**.
+    to your **source/facebook_shares.html**.
     * Copy **plugins/share-numbers.rb** to your **plugins**.
 
 Copy **sass/plugins/_share-numbers.scss** to you **sass/plugins/**.
+
+To use **Custom buttons, getting numbers statically by the plugin**,
+you need url list, like [urllist.html](https://github.com/rcmdnk/octogray/blob/master/source/urllist.html).
+
 
 ## Usage
 
@@ -84,6 +90,8 @@ And set your configuration in **_config.yml**:
     share_custom: true
     share_static: true
     share_check_all: false
+
+    url_list: "urllist.html"
 
     # Select shares
     hatebu_button: true
