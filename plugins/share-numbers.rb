@@ -106,9 +106,12 @@ module Jekyll
         return false
       end
       begin
-        open(config["url"] + "/facebook_shares.html") do |f|
-          content = f.read
-          config["facebook_shares"] = JSON.parse(f.read)
+        begin
+          open(config["url"] + "/facebook_shares.html") do |f|
+            config["facebook_shares"] = JSON.parse(f.read)
+          end
+        rescue
+          config["facebook_shares"] = {}
         end
         url_list = open(config["url"] + "/" + config["url_list"]).split().sort
         config["facebook_shares"].include?("last_n")? i = config["facebook_shares"]["last_n"] : i = 0
