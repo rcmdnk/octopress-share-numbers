@@ -137,6 +137,7 @@ module Jekyll
           end
         end
         config["facebook_shares"]["last_n"] = i
+        config["facebook_shares_json"] = JSON.dump(config["facebook_shares"])
         true
       rescue
         false
