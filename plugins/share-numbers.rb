@@ -113,13 +113,15 @@ module Jekyll
         rescue
           config["facebook_shares"] = {}
         end
-        url_list = open(config["url"] + "/" + config["url_list"]).split().sort
+        url_list = nil
+        open(config["url"] + "/" + config["url_list"]) do |f|
+          url_list = f.read.split().sort
+        end
         config["facebook_shares"].include?("last_n")? i = config["facebook_shares"]["last_n"] : i = 0
         n = 0
         while true
           url = url_list[i]
-          h = get_number('https://graph.facebook.com/?id=' + url, 'jsonfull')
-          p h
+          h = get_number("https://graph.facebook.com/?id=" + config["url"] + url, 'jsonfull')
           if h.class == Hash and h.key?('share')
             config["facebook_shares"][url] = h['share']["share_count"].to_i
           else
@@ -135,7 +137,6 @@ module Jekyll
           end
         end
         config["facebook_shares"]["last_n"] = i
-        p config["facebook_shares"]
         true
       rescue
         false
@@ -156,13 +157,15 @@ module Jekyll
       shares.each do |button|
         name = button.sub('_button', '')
         count = name + 'Count'
-        n != nil ?  n = self.send('get_' + name, url, config) : n = 0
-        m.synchronize do
-          page.data[count] = n
-          if config[count]
-            config[count] += n
-          else
-            config[count] = n
+        n = self.send('get_' + name, url, config)
+        if n != nil
+          m.synchronize do
+            page.data[count] = n
+            if config[count]
+              config[count] += n
+            else
+              config[count] = n
+            end
           end
         end
       end
@@ -174,11 +177,12 @@ module Jekyll
       end
 
       make_facebook_list(site.config)
-      put site.config["facebook_shares"]
 
       m = Mutex.new
       Parallel.map([site.posts, site.pages].flatten, :in_threads => site.config['n_cores'] ? site.config['n_cores'] : 1) do |page_or_post|
-        get_shares(page_or_post, site.config, m)
+        if page_or_post.url.start_with?("/blog")
+          get_shares(page_or_post, site.config, m)
+        end
       end
     end
   end
