@@ -52,6 +52,7 @@ module Jekyll
     end
 
     def get_facebook(url, config)
+      url = url.gsub(config["url"], "")
       if config.include?("facebook_shares") and config["facebook_shares"].include?(url)
         config["facebook_shares"][url]
       else
@@ -120,10 +121,12 @@ module Jekyll
         config["facebook_shares"].include?("last_n")? i = config["facebook_shares"]["last_n"] : i = 0
         n = 0
         while true
-          url = url_list[i]
+          url = url_list[i].gsub("index.html", "")
           h = get_number("https://graph.facebook.com/?id=" + config["url"] + url, 'jsonfull')
-          if h.class == Hash and h.key?('share')
-            config["facebook_shares"][url] = h['share']["share_count"].to_i
+          if h.class == Hash and h.key?('id')
+            if h.key?('share')
+              config["facebook_shares"][url] = h['share']["share_count"].to_i
+            end
           else
             break
           end
