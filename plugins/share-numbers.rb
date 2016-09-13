@@ -101,46 +101,41 @@ module Jekyll
       end
     end
 
-    def make_facebook_list(config)
+    def make_facebook_list(site)
       is_facebook = true
-      if not config['share_check_all'] or not config.include?("url_list")
-        return false
-      end
       begin
         begin
-          open(config["url"] + "/facebook_shares.html") do |f|
-            config["facebook_shares"] = JSON.parse(f.read)
+          open(site.config["url"] + "/facebook_shares.html") do |f|
+            site.config["facebook_shares"] = JSON.parse(f.read)
           end
         rescue
-          config["facebook_shares"] = {}
+          site.config["facebook_shares"] = {}
         end
-        url_list = nil
-        open(config["url"] + "/" + config["url_list"]) do |f|
-          url_list = f.read.split().sort
-        end
-        config["facebook_shares"].include?("last_n")? i = config["facebook_shares"]["last_n"] : i = 0
+        url_list = (site.posts + site.pages).map {|p| (site.config["url"] + p.url).gsub("index.html", "")}.sort
+        site.config["facebook_shares"].include?("last_n")? i = site.config["facebook_shares"]["last_n"] : i = 0
         n = 0
+
         while true
-          url = url_list[i].gsub("index.html", "")
-          h = get_number("https://graph.facebook.com/?id=" + config["url"] + url, 'jsonfull')
+          if i >= url_list.size
+            i = 0
+          end
+          if n == url_list.size
+            break
+          end
+          url = url_list[i]
+          h = get_number("https://graph.facebook.com/?id=" + url, 'jsonfull')
           if h.class == Hash and h.key?('id')
             if h.key?('share')
-              config["facebook_shares"][url] = h['share']["share_count"].to_i
+              site.config["facebook_shares"][url] = h['share']["share_count"].to_i
             end
           else
             break
           end
           i += 1
           n += 1
-          if i == url_list.size
-            i = 0
-          end
-          if n == url_list.size
-            break
-          end
         end
-        config["facebook_shares"]["last_n"] = i
-        config["facebook_shares_json"] = JSON.dump(config["facebook_shares"])
+        site.config["facebook_shares"]["last_n"] = i
+        site.config["facebook_shares_json"] = JSON.dump(site.config["facebook_shares"])
         true
       rescue
         false
@@ -180,13 +175,11 @@ module Jekyll
         return
       end
 
-      make_facebook_list(site.config)
+      make_facebook_list(site)
 
       m = Mutex.new
       Parallel.map([site.posts, site.pages].flatten, :in_threads => site.config['n_cores'] ? site.config['n_cores'] : 1) do |page_or_post|
-        if page_or_post.url.start_with?("/blog")
-          get_shares(page_or_post, site.config, m)
-        end
+        get_shares(page_or_post, site.config, m)
       end
     end
   end

@@ -52,10 +52,6 @@ There are three methods:
 
 Copy **sass/plugins/_share-numbers.scss** to you **sass/plugins/**.
 
-To use **Custom buttons, getting numbers statically by the plugin**,
-you need url list, like [urllist.html](https://github.com/rcmdnk/octogray/blob/master/source/urllist.html).
-
-
 ## Usage
 
 
@@ -90,8 +86,6 @@ And set your configuration in **_config.yml**:
     share_custom: true
     share_static: true
     share_check_all: false
-
-    url_list: "urllist.html"
 
     # Select shares
     hatebu_button: true
