@@ -140,7 +140,7 @@ module Jekyll
           i += 1
           n += 1
         end
-        site.config["facebook_shares"]["last_n"] = i
+        site.config["facebook_shares"]["last_url"] = url_list[i]
         site.config["facebook_shares_json"] = JSON.dump(site.config["facebook_shares"])
         true
       rescue
