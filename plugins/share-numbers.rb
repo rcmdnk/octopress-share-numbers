@@ -112,7 +112,13 @@ module Jekyll
           site.config["facebook_shares"] = {}
         end
         url_list = (site.posts + site.pages).map {|p| (site.config["url"] + p.url).gsub("index.html", "")}.sort
-        site.config["facebook_shares"].include?("last_n")? i = site.config["facebook_shares"]["last_n"] : i = 0
+        i = 0
+        if site.config["facebook_shares"].include?("last_url")
+          i = url_lsit.find_index(site.config["facebook_shares"]["last_url"])
+          if i == nil
+            i = 0
+          end
+        end
         n = 0
 
         while true
