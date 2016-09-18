@@ -108,14 +108,17 @@ module Jekyll
           open(site.config["url"] + "/facebook_shares.html") do |f|
             site.config["facebook_shares"] = JSON.parse(f.read)
           end
-        rescue
+        rescue Exception => e
+          puts e.message
+          puts e.backtrace.inspect
           site.config["facebook_shares"] = {}
         end
         url_list = (site.posts + site.pages).map {|p| (site.config["url"] + p.url).gsub("index.html", "")}.sort
         i = 0
         if site.config["facebook_shares"].include?("last_url")
-          i = url_lsit.find_index(site.config["facebook_shares"]["last_url"])
+          i = url_list.find_index(site.config["facebook_shares"]["last_url"])
           if i == nil
+            puts 'hoge5'
             i = 0
           end
         end
@@ -129,7 +132,10 @@ module Jekyll
             break
           end
           url = url_list[i]
+          puts i
+          puts url
           h = get_number("https://graph.facebook.com/?id=" + url, 'jsonfull')
+          puts h
           if h.class == Hash and h.key?('id')
             if h.key?('share')
               site.config["facebook_shares"][url] = h['share']["share_count"].to_i
@@ -143,7 +149,10 @@ module Jekyll
         site.config["facebook_shares"]["last_url"] = url_list[i]
         site.config["facebook_shares_json"] = JSON.dump(site.config["facebook_shares"])
         true
-      rescue
+      rescue Exception => e
+        puts e.message
+        puts e.backtrace.inspect
+        puts 'failed'
         false
       end
     end
