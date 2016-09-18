@@ -132,10 +132,7 @@ module Jekyll
             break
           end
           url = url_list[i]
-          puts i
-          puts url
           h = get_number("https://graph.facebook.com/?id=" + url, 'jsonfull')
-          puts h
           if h.class == Hash and h.key?('id')
             if h.key?('share')
               site.config["facebook_shares"][url] = h['share']["share_count"].to_i
