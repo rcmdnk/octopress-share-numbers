@@ -52,7 +52,6 @@ module Jekyll
     end
 
     def get_facebook(url, config)
-      url = url.gsub(config["url"], "")
       if config.include?("facebook_shares") and config["facebook_shares"].include?(url)
         config["facebook_shares"][url]
       else
@@ -118,7 +117,6 @@ module Jekyll
         if site.config["facebook_shares"].include?("last_url")
           i = url_list.find_index(site.config["facebook_shares"]["last_url"])
           if i == nil
-            puts 'hoge5'
             i = 0
           end
         end
