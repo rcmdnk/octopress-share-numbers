@@ -166,8 +166,7 @@ module Jekyll
       shares.each do |button|
         name = button.sub('_button', '')
         count = name + 'Count'
-        #n = self.send('get_' + name, url, config)
-        n = 0
+        n = self.send('get_' + name, url, config)
         if n != nil
           m.synchronize do
             page.data[count] = n
