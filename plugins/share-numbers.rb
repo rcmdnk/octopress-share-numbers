@@ -112,7 +112,7 @@ module Jekyll
           puts e.backtrace.inspect
           site.config["facebook_shares"] = {}
         end
-        url_list = (site.posts + site.pages).map {|p| (site.config["url"] + p.url).gsub("index.html", "")}.sort
+        url_list = (site.posts.docs + site.pages).map {|p| (site.config["url"] + p.url).gsub("index.html", "")}.sort
         i = 0
         if site.config["facebook_shares"].include?("last_url")
           i = url_list.find_index(site.config["facebook_shares"]["last_url"])
@@ -166,7 +166,8 @@ module Jekyll
       shares.each do |button|
         name = button.sub('_button', '')
         count = name + 'Count'
-        n = self.send('get_' + name, url, config)
+        #n = self.send('get_' + name, url, config)
+        n = 0
         if n != nil
           m.synchronize do
             page.data[count] = n
@@ -188,7 +189,7 @@ module Jekyll
       make_facebook_list(site)
 
       m = Mutex.new
-      Parallel.map([site.posts, site.pages].flatten, :in_threads => site.config['n_cores'] ? site.config['n_cores'] : 1) do |page_or_post|
+      Parallel.map([site.posts.docs, site.pages].flatten, :in_threads => site.config['n_cores'] ? site.config['n_cores'] : 1) do |page_or_post|
         get_shares(page_or_post, site.config, m)
       end
     end
