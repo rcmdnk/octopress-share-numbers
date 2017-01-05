@@ -23,52 +23,52 @@
 <div class="share-button share-big">
   <ul>
     {% if hatebu %}
-    <li><a href="http://b.hatena.ne.jp/entry/{{share_url}}"
+    <li><a href="//b.hatena.ne.jp/entry/{{share_url}}"
     title="Save to Hatebu"
     target="_blank"><p class="hatebu_custom"><span class="hatebuBig" data-share-url="{{share_url}}">{{site.share_big.hatebu}}</span></p></a></li>
     {% endif %}
     {% if twitter %}
-    <li><a href="http://twitter.com/intent/tweet?text={{share_title}}&url={{share_url}}&via={{site.author}}"
+    <li><a href="//twitter.com/intent/tweet?text={{share_title}}&url={{share_url}}&via={{site.author}}"
     title="Share on Twitter"
     target="_blacnk"><p class="twitter_custom"><span class="twitterBig" data-share-url="{{share_url}}">{{site.share_big.twitter}}</span></p></a></li>
     {% endif %}
     {% if googleplus %}
-    <li><a href="https://plus.google.com/share?url={{share_url}}&title={{share_title}}"
+    <li><a href="//plus.google.com/share?url={{share_url}}&title={{share_title}}"
     title="Share on Google+"
     target="_blank"><p class="googleplus_custom"><span class="googleplusBig"  data-share-url="{{share_url}}">{{site.share_big.googleplus}}</span></p></a></li>
     {% endif %}
     {% if facebook %}
-    <li><a href="http://www.facebook.com/sharer.php?src=bm&u={{share_url}}&amp;t={{share_title}}"
+    <li><a href="//www.facebook.com/sharer.php?src=bm&u={{share_url}}&amp;t={{share_title}}"
     title="Share on Facebook"
     target="_blank"><p class="facebook_custom"><span class="facebookBig" data-share-url="{{share_url}}">{{site.share_big.facebook}}</span></p></a></li>
     {% endif %}
     {% if pocket %}
-    <li><a href="http://getpocket.com/edit?url={{share_url}}&title={{share_title}}"
+    <li><a href="//getpocket.com/edit?url={{share_url}}&title={{share_title}}"
     title="Save to Pocket"
     target="_blank"><p class="pocket_custom"><span class="pocketBig" data-share-url="{{share_url}}">{{site.share_big.pocket}}</span></p></a></li>
     {% endif %}
     {% if linkedin %}
-    <li><a href="http://www.linkedin.com/shareArticle?mini=true&url={{share_url}}&title={{share_title}}&source={{site.author}}"
+    <li><a href="//www.linkedin.com/shareArticle?mini=true&url={{share_url}}&title={{share_title}}&source={{site.author}}"
     title="Share on LinkedIn"
     target="_blank"><p class="linkedin_custom"><span class="linkedinBig" data-share-url="{{share_url}}">{{site.share_big.linkedin}}</span></p></a></li>
     {% endif %}
     {% if stumble %}
-    <li><a href="http://www.stumbleupon.com/badge/?url={{share_url}}&title={{share_title}}"
+    <li><a href="//www.stumbleupon.com/badge/?url={{share_url}}&title={{share_title}}"
     title="Save to StumbleUpon"
     target="_blank"><p class="stumble_custom"><span class="stumbleBig" data-share-url="{{share_url}}">{{site.share_big.stumble}}</span></p></a></li>
     {% endif %}
     {% if pinterest %}
-    <li><a href="http://pinterest.com/pin/create/button/?url={{share_url}}&title={{share_title}}"
+    <li><a href="//pinterest.com/pin/create/button/?url={{share_url}}&title={{share_title}}"
     title="Save to Pinterest"
     target="_blank"><p class="pinterest_custom"><span class="pinterestBig" data-share-url="{{share_url}}">{{site.share_big.pinterest}}</span></p></a></li>
     {% endif %}
     {% if buffer %}
-    <li><a href="https://api.bufferapp.com/1/links/shares.json?url={{share_url}}&title={{share_title}}"
+    <li><a href="//api.bufferapp.com/1/links/shares.json?url={{share_url}}&title={{share_title}}"
     title="Save to buffer"
     target="_blank"><p class="buffer_custom"><span class="bufferBig" data-share-url="{{share_url}}">{{site.share_big.buffer}}</span></p></a></li>
     {% endif %}
     {% if delicious %}
-    <li><a href="https://delicious.com/save?v=5&provider={{site.author}}&noui&jump=close&url={{share_url}}&title={{share_title}}"
+    <li><a href="//delicious.com/save?v=5&provider={{site.author}}&noui&jump=close&url={{share_url}}&title={{share_title}}"
     title="Save to Delicious"
     target="_blank"><p class="delicious_custom"><span class="deliciousBig" data-share-url="{{share_url}}">{{site.share_big.delicious}}</span></p></a></li>
     {% endif %}
@@ -76,12 +76,12 @@
     {% capture description %}{% if p.description %}{{ p.description }}{% endif %}{% endcapture %}
     {% capture description %}{{ description | strip_html | codense_spaces | truncate:150 }}{% endcapture %}
     <li><a
-    href="http://www.tumblr.com/share/link?url={{share_url|cgi_escape}}&name={{share_title|cgi_escape}}&description={{description|cgi_escape}}"
+    href="//www.tumblr.com/share/link?url={{share_url|cgi_escape}}&name={{share_title|cgi_escape}}&description={{description|cgi_escape}}"
     title="Share on Tumblr"
     target="_blank"><p class="tumblr_custom"><span class="tumblrBig" data-share-url="{{share_url}}">{{site.share_big.tumblr}}</span></p></a></li>
     {% endif %}
     {% if feedly %}
-    <li><a href='http://feedly.com/i/subscription/feed/{{site.url}}{{site.subscribe_rss}}' title="Follow with feedly"
+    <li><a href='//feedly.com/i/subscription/feed/{{site.url}}{{site.subscribe_rss}}' title="Follow with feedly"
     target="_blank"><p class="feedly_custom"><span class="feedlyBig" data-share-url="{{share_url}}">{{site.share_big.feedly}}</span></p></a></li>
     {% endif %}
   </ul>
