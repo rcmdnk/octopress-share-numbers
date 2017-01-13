@@ -4,7 +4,7 @@
   {% assign p = page %}
 {% endif %}
 {% capture share_url %}{{ site.url | uri_escape}}{{ p.url | uri_escape}}{% endcapture %}
-{% capture share_title %}{{ p.title }}{% endcapture %}
+{% capture share_title %}{{ p.title | uri_escape}}{% endcapture %}
 {% if site.share_all or page.share_all %}{% assign views = true %}{%elsif p.views_button != nil %}{% assign views = p.views_button %}{% else %}{% assign views = site.views_button %}{% endif %}
 {% if views %}
   {% if site.views_periods or page.views_periods or p.views_periods %}
