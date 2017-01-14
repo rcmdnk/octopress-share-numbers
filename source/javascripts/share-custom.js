@@ -39,7 +39,11 @@ $(function(){
     socialData.url = '//graph.facebook.com/';
     socialData.data.id = url;
     socialData.success = function(data){
-      socialData.socialPush(data.share.share_count);
+      var n = 0;
+      if ('share' in data && 'share_count' in data.share){
+        n = data.share.share_count;
+      }
+      socialData.socialPush(n);
     };
   };
   socialFunc.pocket = function(socialData, url){
@@ -48,7 +52,11 @@ $(function(){
     socialData.data.format = "json";
     socialData.data.env = "http://datatables.org/alltables.env";
     socialData.success = function (data) {
-      socialData.socialPush(data.query.results.resources.content.match(/<em id="cnt">(\d+)<\/em>/)[1]);
+      var n = 0;
+      if (data.query.results.resources.content !== null){
+        n = data.query.results.resources.content.match(/<em id="cnt">(\d+)<\/em>/)[1];
+      }
+      socialData.socialPush(n);
     };
   };
   socialFunc.linkedin = function(socialData, url){
