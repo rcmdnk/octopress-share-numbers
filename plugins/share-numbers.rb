@@ -92,7 +92,7 @@ module Jekyll
     end
 
     def get_delicious(url, config)
-      h = get_number('https://feeds.delicious.com/v2/json/urlinfo/data?url=' + url, 'jsonfull')
+      h = get_number('https://feeds.del.icio.us/v2/json/urlinfo/data?url=' + url, 'jsonfull')
       begin
         h[0]['total_posts'].to_i
       rescue

@@ -13,7 +13,7 @@ Available social buttons are:
 * [StumbleUpon](https://www.stumbleupon.com/)
 * [Pinterest](https://pinterest.com/)
 * [Buffer](https://buffer.com/) (not in sharing.html)
-* [Delicious](https://delicious.com/) (currently count is not available)
+* [Delicious](https://del.icio.us/) (currently count is not available)
 * [Tumblr](https://www.tumblr.com/) (Only button w/o cound)
 
 ## Requirement

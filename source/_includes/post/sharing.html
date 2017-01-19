@@ -10,10 +10,10 @@
     {% if site.hatebu_button %}
     <li class="hatebu">
     <div class="hatebu">
-      <a href="http://b.hatena.ne.jp/entry/{{share_url}}"
+      <a href="//b.hatena.ne.jp/entry/{{share_url}}"
           class="hatena-bookmark-button"
           data-hatena-bookmark-layout="standard"
-      ><img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+      ><img src="//b.st-hatena.com/images/entry-button/button-only.gif"
             alt="{{site.hatena_add}}"/></a>
     </div>
     </li>
@@ -21,7 +21,7 @@
     {% if site.twitter_button %}
     <li class="twitter">
     <div class="twitter">
-      <a href="http://twitter.com/share"
+      <a href="//twitter.com/share"
           class="twitter-share-button"
           data-url="{{share_url}}"
           data-via="{{ site.twitter_user }}"
@@ -63,7 +63,7 @@
     {% if site.pocket_button %}
     <li class="pocket">
     <div class="pocket">
-      <a href="https://getpocket.com/save"
+      <a href="://getpocket.com/save"
           class="pocket-btn" data-lang="en"
           data-save-url="{{share_url}}"
           data-pocket-count="horizontal"
@@ -100,8 +100,8 @@
     <li class="delicious">
     <div class="delicious">
       <a href="#"
-        onclick="window.open('https://delicious.com/save?v=5&provider={{site.author}}&noui&jump=close&url={{share_url}}&title={{share_title|cgi_escape}}', 'delicious','toolbar=no,width=550,height=550'); return false;"
-        ><img src="https://delicious.com/img/logo.png" height="16" width="16" alt="Delicious"> Save this on Delicious</a>
+        onclick="window.open('//del.icio.us.com/save?v=5&provider={{site.author}}&noui&jump=close&url={{share_url}}&title={{share_title|cgi_escape}}', 'delicious','toolbar=no,width=550,height=550'); return false;"
+        ><img src="//del.icio.us.com/img/logo.png" height="16" width="16" alt="Delicious"> Save this on Delicious</a>
     </div>
     </li>
     {% endif %}
@@ -124,7 +124,7 @@
     {% capture description %}{{ description | strip_html | codense_spaces | truncate:150 }}{% endcapture %}
     <li class="tumblr">
     <div class="tumblr">
-      <a href="http://www.tumblr.com/share/link?url={{share_url|cgi_escape}}&name={{share_title|cgi_escape}}&description={{description|cgi_escape}}"
+      <a href="//www.tumblr.com/share/link?url={{share_url|cgi_escape}}&name={{share_title|cgi_escape}}&description={{description|cgi_escape}}"
           title="Share on Tumblr"
           class="tumblr_button"
           style="">Tumblr</a>

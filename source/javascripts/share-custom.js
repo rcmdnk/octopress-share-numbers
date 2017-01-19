@@ -98,7 +98,7 @@ $(function(){
     };
   };
   socialFunc.delicious = function(socialData, url){
-    socialData.url = '//feeds.delicious.com/v2/json/urlinfo/data';
+    socialData.url = '//feeds.del.icio.us/v2/json/urlinfo/data';
     socialData.data.url = url;
     socialData.success = function(data){
       socialData.socialPush((data.length>0)? data[0].total_posts : 0);
