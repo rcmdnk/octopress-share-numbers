@@ -3,8 +3,8 @@
 {% else %}
   {% assign p = page %}
 {% endif %}
-{% capture share_url %}{{ site.url }}{{ p.url | remove:'index.html'}}{% endcapture %}
-{% capture share_title %}{{ p.title }}{% endcapture %}
+{% capture share_url %}{{ site.url |uri_escape }}{{ p.url | remove:'index.html' |uri_escape}}{% endcapture %}
+{% capture share_title %}{{ p.title|cgi_escape }}{% endcapture %}
 <div class="sharing">
   <ul>
     {% if site.hatebu_button %}
