@@ -11,7 +11,7 @@ module Jekyll
 
     def get_number(api, format='non', val='non', remove=nil)
       begin
-        open(api) do |f|
+        URI.open(api) do |f|
           content = f.read
           if remove != nil
             if remove.is_a? String
