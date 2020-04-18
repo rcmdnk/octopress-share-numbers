@@ -104,7 +104,7 @@ module Jekyll
       is_facebook = true
       begin
         begin
-          open(site.config["url"] + "/facebook_shares.html") do |f|
+          URI.open(site.config["url"] + "/facebook_shares.html") do |f|
             site.config["facebook_shares"] = JSON.parse(f.read)
           end
         rescue Exception => e
