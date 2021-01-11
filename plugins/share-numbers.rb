@@ -109,7 +109,7 @@ module Jekyll
           end
         rescue Exception => e
           puts e.message
-          puts e.backtrace.inspect
+          puts e.backtrace
           site.config["facebook_shares"] = {}
         end
         url_list = (site.posts.docs + site.pages).map {|p| (site.config["url"] + p.url).gsub("index.html", "")}.sort
