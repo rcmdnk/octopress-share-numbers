@@ -5,7 +5,7 @@
 {% endif %}
 {% capture share_url %}{{ site.url | uri_escape}}{{ p.url | remove:'index.html' | uri_escape}}{% endcapture %}
 {% capture share_title %}{{ p.title | cgi_escape}}{% endcapture %}
-{% if site.share_all or page.share_all %}{% assign views = true %}{%elsif p.views_button != nil %}{% assign views = p.views_button %}{% else %}{% assign views = site.views_button %}{% endif %}
+{% if site.share_all or page.share_all %}{% assign views = true %}{% elsif p.views_button != nil %}{% assign views = p.views_button %}{% else %}{% assign views = site.views_button %}{% endif %}
 {% if views %}
   {% if site.views_periods or page.views_periods or p.views_periods %}
     {% capture n_views1d %}{% if p._pv_1-day-ago-to-now %}{{p._pv_1-day-ago-to-now}}{% else %}0{% endif %}{% endcapture %}
@@ -18,18 +18,18 @@
   {% endif %}
 {% endif %}
 
-{% if site.share_all or page.share_all %}{% assign hatebu = true %}{%elsif p.hatebu_button != nil %}{% assign hatebu = p.hatebu_button %}{% else %}{% assign hatebu = site.hatebu_button %}{% endif %}
-{% if site.share_all or page.share_all %}{% assign twitter = true %}{%elsif p.twitter_button != nil %}{% assign twitter = p.twitter_button %}{% else %}{% assign twitter = site.twitter_button %}{% endif %}
-{% if site.share_all or page.share_all %}{% assign googleplus = true %}{%elsif p.googleplus_button != nil %}{% assign googleplus = p.googleplus_button %}{% else %}{% assign googleplus = site.googleplus_button %}{% endif %}
-{% if site.share_all or page.share_all %}{% assign facebook = true %}{%elsif p.facebook_button != nil %}{% assign facebook = p.facebook_button %}{% else %}{% assign facebook = site.facebook_button %}{% endif %}
-{% if site.share_all or page.share_all %}{% assign pocket = true %}{%elsif p.pocket_button != nil %}{% assign pocket = p.pocket_button %}{% else %}{% assign pocket = site.pocket_button %}{% endif %}
-{% if site.share_all or page.share_all %}{% assign linkedin = true %}{%elsif p.linkedin_button != nil %}{% assign linkedin = p.linkedin_button %}{% else %}{% assign linkedin = site.linkedin_button %}{% endif %}
-{% if site.share_all or page.share_all %}{% assign stumble = true %}{%elsif p.stumble_button != nil %}{% assign stumble = p.stumble_button %}{% else %}{% assign stumble = site.stumble_button %}{% endif %}
-{% if site.share_all or page.share_all %}{% assign pinterest = true %}{%elsif p.pinterest_button != nil %}{% assign pinterest = p.pinterest_button %}{% else %}{% assign pinterest = site.pinterest_button %}{% endif %}
-{% if site.share_all or page.share_all %}{% assign buffer = true %}{%elsif p.buffer_button != nil %}{% assign buffer = p.buffer_button %}{% else %}{% assign buffer = site.buffer_button %}{% endif %}
-{% if site.share_all or page.share_all %}{% assign delicious = true %}{%elsif p.delicious_button != nil %}{% assign delicious = p.delicious_button %}{% else %}{% assign delicious = site.delicious_button %}{% endif %}
+{% if site.share_all or page.share_all %}{% assign hatebu = true %}{% elsif p.hatebu_button != nil %}{% assign hatebu = p.hatebu_button %}{% else %}{% assign hatebu = site.hatebu_button %}{% endif %}
+{% if site.share_all or page.share_all %}{% assign twitter = true %}{% elsif p.twitter_button != nil %}{% assign twitter = p.twitter_button %}{% else %}{% assign twitter = site.twitter_button %}{% endif %}
+{% if site.share_all or page.share_all %}{% assign googleplus = true %}{% elsif p.googleplus_button != nil %}{% assign googleplus = p.googleplus_button %}{% else %}{% assign googleplus = site.googleplus_button %}{% endif %}
+{% if site.share_all or page.share_all %}{% assign facebook = true %}{% elsif p.facebook_button != nil %}{% assign facebook = p.facebook_button %}{% else %}{% assign facebook = site.facebook_button %}{% endif %}
+{% if site.share_all or page.share_all %}{% assign pocket = true %}{% elsif p.pocket_button != nil %}{% assign pocket = p.pocket_button %}{% else %}{% assign pocket = site.pocket_button %}{% endif %}
+{% if site.share_all or page.share_all %}{% assign linkedin = true %}{% elsif p.linkedin_button != nil %}{% assign linkedin = p.linkedin_button %}{% else %}{% assign linkedin = site.linkedin_button %}{% endif %}
+{% if site.share_all or page.share_all %}{% assign stumble = true %}{% elsif p.stumble_button != nil %}{% assign stumble = p.stumble_button %}{% else %}{% assign stumble = site.stumble_button %}{% endif %}
+{% if site.share_all or page.share_all %}{% assign pinterest = true %}{% elsif p.pinterest_button != nil %}{% assign pinterest = p.pinterest_button %}{% else %}{% assign pinterest = site.pinterest_button %}{% endif %}
+{% if site.share_all or page.share_all %}{% assign buffer = true %}{% elsif p.buffer_button != nil %}{% assign buffer = p.buffer_button %}{% else %}{% assign buffer = site.buffer_button %}{% endif %}
+{% if site.share_all or page.share_all %}{% assign delicious = true %}{% elsif p.delicious_button != nil %}{% assign delicious = p.delicious_button %}{% else %}{% assign delicious = site.delicious_button %}{% endif %}
 {% unless site.share_number or page.share_number or p.share_number %}
-{% if site.share_all or page.share_all %}{% assign tumblr = true %}{%elsif p.tumblr_button != nil %}{% assign tumblr = p.tumblr_button %}{% else %}{% assign tumblr = site.tumblr_button %}{% endif %}
+{% if site.share_all or page.share_all %}{% assign tumblr = true %}{% elsif p.tumblr_button != nil %}{% assign tumblr = p.tumblr_button %}{% else %}{% assign tumblr = site.tumblr_button %}{% endif %}
 {% endunless %}
 
 <div class="share-button">

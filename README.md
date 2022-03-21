@@ -57,7 +57,7 @@ Copy **sass/plugins/_share-numbers.scss** to you **sass/plugins/**.
 
 Put **share-custom.js** in **source/_includes/head.html**, after jQuery (**share-custom.js** uses jQuery):
 
-    {%unless site.share_static%}<script src="{{root_url}}/javascripts/compressed/share-custom.js"></script>{%endunless%}
+    {% unless site.share_static %}<script src="{{root_url}}/javascripts/compressed/share-custom.js"></script>{% endunless %}
 
 Put **sharing_custom.html** in such **source/_layouts/post.html**,
 like:
