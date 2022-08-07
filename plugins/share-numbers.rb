@@ -74,14 +74,6 @@ module Jekyll
       get_number('https://www.linkedin.com/countserv/count/share?format=json&url=' + url, 'json', 'count').to_i
     end
 
-    def get_stumble(url, config)
-      h = get_number('https://www.stumbleupon.com/services/1.01/badge.getinfo?url=' + url, 'jsonfull')
-      begin
-        h['result']['views'].to_i
-      rescue
-        0
-      end
-    end
 
     def get_pinterest(url, config)
       get_number('https://api.pinterest.com/v1/urls/count.json?url=' + url, 'json', 'count', ['receiveCount(',')']).to_i
@@ -159,7 +151,7 @@ module Jekyll
     def get_shares(page, config, m)
       url = config['url'] + page.url
       shares = ['hatebu', 'twitter', 'googleplus', 'facebook', 'pocket',
-                'linkedin', 'stumble', 'pinterest', 'buffer', 'delicious']
+                'linkedin', 'pinterest', 'buffer', 'delicious']
       if not config['share_check_all']
         shares = config.select{|key, val| key.is_a?(String) and key.end_with?('_button') and val == true}.keys
       end

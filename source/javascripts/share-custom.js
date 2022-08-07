@@ -66,20 +66,6 @@ $(function(){
       socialData.socialPush(data.count);
     };
   };
-  socialFunc.stumble = function(socialData, url){
-    socialData.url = "//query.yahooapis.com/v1/public/yql";
-    socialData.data.q = "SELECT content FROM data.headers WHERE url='http://www.stumbleupon.com/services/1.01/badge.getinfo?url=" + url + "'";
-    socialData.data.format = "json";
-    socialData.data.env = "http://datatables.org/alltables.env";
-    socialData.success = function (data) {
-      var j = JSON.parse(data.query.results.resources.content);
-      var n = 0;
-      if(j != undefined && j.result != undefined){
-        n = j.result.views || 0;
-      }
-      socialData.socialPush(n);
-    };
-  };
   socialFunc.pinterest = function(socialData, url){
     socialData.url = '//api.pinterest.com/v1/urls/count.json';
     socialData.data.url = url;
@@ -187,7 +173,7 @@ $(function(){
   var socials=[];
   var smarks = ["hatebu", "twitter", "googleplus",
                "facebook", "pocket", "linkedin",
-               "stumble", "pinterest", "buffer", "delicious"];
+               "pinterest", "buffer", "delicious"];
   for(var i=0;i<smarks.length;i++){
     if(jekyll_var("share_check_all")||jekyll_var(smarks[i]+'_button')){
       socials.push(smarks[i]);
