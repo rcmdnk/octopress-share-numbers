@@ -25,16 +25,6 @@ $(function(){
       socialData.socialPush(data.count);
     };
   };
-  socialFunc.googleplus = function(socialData, url){
-    socialData.url = "//query.yahooapis.com/v1/public/yql";
-    socialData.data.q = "SELECT content FROM data.headers WHERE url='https://plusone.google.com/_/+1/fastbutton?url=" + url + "'";
-    socialData.data.format = "json";
-    socialData.data.env = "http://datatables.org/alltables.env";
-    socialData.success = function (data) {
-      var m = data.query.results.resources.content.match(/window\.__SSR = {c: ([\d]+)/);
-      socialData.socialPush((m != null)? m[1] : 0);
-    };
-  };
   socialFunc.facebook = function(socialData, url){
     socialData.url = '//graph.facebook.com/';
     socialData.data.id = url;
@@ -171,7 +161,7 @@ var socialCount = function (socials) {
 $(function(){
   if(! "jekyll_var" in window)return;
   var socials=[];
-  var smarks = ["hatebu", "twitter", "googleplus",
+  var smarks = ["hatebu", "twitter",
                "facebook", "pocket", "linkedin",
                "pinterest", "buffer", "delicious"];
   for(var i=0;i<smarks.length;i++){

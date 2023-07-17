@@ -46,11 +46,6 @@ module Jekyll
       get_number('http://jsoon.digitiminimi.com/twitter/count.json?url=' + url, 'json', 'count').to_i
     end
 
-    def get_googleplus(url, config)
-      get_number('https://plusone.google.com/_/+1/fastbutton?url=' + url,
-                 'html', /window\.__SSR = {c: ([\d]+)/).to_i
-    end
-
     def get_facebook(url, config)
       if config.include?("facebook_shares") and config["facebook_shares"].include?(url)
         config["facebook_shares"][url]
@@ -150,7 +145,7 @@ module Jekyll
 
     def get_shares(page, config, m)
       url = config['url'] + page.url
-      shares = ['hatebu', 'twitter', 'googleplus', 'facebook', 'pocket',
+      shares = ['hatebu', 'twitter', 'facebook', 'pocket',
                 'linkedin', 'pinterest', 'buffer', 'delicious']
       if not config['share_check_all']
         shares = config.select{|key, val| key.is_a?(String) and key.end_with?('_button') and val == true}.keys

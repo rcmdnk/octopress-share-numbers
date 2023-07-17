@@ -20,7 +20,6 @@
 
 {% if site.share_all or page.share_all %}{% assign hatebu = true %}{% elsif p.hatebu_button != nil %}{% assign hatebu = p.hatebu_button %}{% else %}{% assign hatebu = site.hatebu_button %}{% endif %}
 {% if site.share_all or page.share_all %}{% assign twitter = true %}{% elsif p.twitter_button != nil %}{% assign twitter = p.twitter_button %}{% else %}{% assign twitter = site.twitter_button %}{% endif %}
-{% if site.share_all or page.share_all %}{% assign googleplus = true %}{% elsif p.googleplus_button != nil %}{% assign googleplus = p.googleplus_button %}{% else %}{% assign googleplus = site.googleplus_button %}{% endif %}
 {% if site.share_all or page.share_all %}{% assign facebook = true %}{% elsif p.facebook_button != nil %}{% assign facebook = p.facebook_button %}{% else %}{% assign facebook = site.facebook_button %}{% endif %}
 {% if site.share_all or page.share_all %}{% assign pocket = true %}{% elsif p.pocket_button != nil %}{% assign pocket = p.pocket_button %}{% else %}{% assign pocket = site.pocket_button %}{% endif %}
 {% if site.share_all or page.share_all %}{% assign linkedin = true %}{% elsif p.linkedin_button != nil %}{% assign linkedin = p.linkedin_button %}{% else %}{% assign linkedin = site.linkedin_button %}{% endif %}
@@ -65,11 +64,6 @@
     <li><a href="//twitter.com/intent/tweet?text={{share_title}}&url={{share_url}}&via={{site.author}}"
     title="Share on Twitter"
     target="_blank"><p class="twitter_custom"><i class="fa fa-twitter"></i> <span class="twitterCount" data-share-url="{{share_url}}" data-count="{{p.twitterCount}}">{{p.twitterCount}}</span></p></a></li>
-    {% endif %}
-    {% if googleplus %}
-    <li><a href="//plus.google.com/share?url={{share_url}}&title={{share_title}}"
-    title="Share on Google+"
-    target="_blank"><p  class="googleplus_custom"><i class="fa fa-google-plus"></i> <span class="googleplusCount"  data-share-url="{{share_url}}" data-count="{{p.googleplusCount}}">{{p.googleplusCount}}</span></p></a></li>
     {% endif %}
     {% if facebook %}
     <li><a href="//www.facebook.com/sharer.php?src=bm&u={{share_url}}&amp;t={{share_title}}"

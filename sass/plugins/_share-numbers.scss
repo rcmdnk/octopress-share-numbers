@@ -13,9 +13,6 @@
     .twitter {
       width: 90px;
     }
-    .googleplus {
-      width: 58px;
-    }
     //.facebook {
     //  width: 100px;
     //}
@@ -65,7 +62,6 @@ $views1y-color: darken($views-color,5);
 $views10y-color: darken($views-color,10);
 $hatebu-color: #2C6ECD;
 $twitter-color: #00ACEE;
-$googleplus-color: #DD4C39;
 $facebook-color: #5776CE;
 $pocket-color: #EF4257;
 $linkedin-color: #4E8BBF;
@@ -165,14 +161,6 @@ $feedly-color: #6CC655;
       &:hover {
         background-color: darken($twitter-color, 10);
         border-color: darken($twitter-color, 10);
-      }
-    }
-    .googleplus_custom {
-      background-color: $googleplus-color;
-      border-color: $googleplus-color;
-      &:hover {
-        background-color: darken($googleplus-color, 10);
-        border-color: darken($googleplus-color, 10);
       }
     }
     .facebook_custom {

@@ -89,7 +89,6 @@ And set your configuration in **_config.yml**:
     # Select shares
     hatebu_button: true
     twitter_button: true
-    googleplus_button: true
     facebook_button: true
     pocket_button: true
     linkedin_button: false
@@ -104,7 +103,6 @@ And set your configuration in **_config.yml**:
       include:
         - hatebu_button
         - twitter_button
-        - googleplus_button
         - facebook_button
         - pocket_button
         - linkedin_button
