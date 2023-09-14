@@ -8,11 +8,11 @@
 {% if site.share_all or page.share_all %}{% assign views = true %}{% elsif p.views_button != nil %}{% assign views = p.views_button %}{% else %}{% assign views = site.views_button %}{% endif %}
 {% if views %}
   {% if site.views_periods or page.views_periods or p.views_periods %}
-    {% capture n_views1d %}{% if p._pv_1-day-ago-to-now %}{{p._pv_1-day-ago-to-now}}{% else %}0{% endif %}{% endcapture %}
-    {% capture n_views1w %}{% if p._pv_1-week-ago-to-now %}{{p._pv_1-week-ago-to-now}}{% else %}0{% endif %}{% endcapture %}
-    {% capture n_views1m %}{% if p._pv_1-month-ago-to-now %}{{p._pv_1-month-ago-to-now}}{% else %}0{% endif %}{% endcapture %}
-    {% capture n_views1y %}{% if p._pv_1-year-ago-to-now %}{{p._pv_1-year-ago-to-now}}{% else %}0{% endif %}{% endcapture %}
-    {% capture n_views10y %}{% if p._pv_10-years-ago-to-now %}{{p._pv_10-years-ago-to-now}}{% else %}0{% endif %}{% endcapture %}
+    {% capture n_views1d %}{% if p._pv_1daysAgo-to-today %}{{p._pv_1daysAgo-to-today}}{% else %}0{% endif %}{% endcapture %}
+    {% capture n_views1w %}{% if p._pv_7daysAgo-to-today %}{{p._pv_7daysAgo-to-today}}{% else %}0{% endif %}{% endcapture %}
+    {% capture n_views1m %}{% if p._pv_30daysAgo-to-today %}{{p._pv_30daysAgo-to-today}}{% else %}0{% endif %}{% endcapture %}
+    {% capture n_views1y %}{% if p._pv_365daysAgo-to-today %}{{p._pv_365daysAgo-to-today}}{% else %}0{% endif %}{% endcapture %}
+    {% capture n_views10y %}{% if p._pv_3653daysAgo-to-today %}{{p._pv_3653daysAgo-to-today}}{% else %}0{% endif %}{% endcapture %}
   {% else %}
     {% capture n_views %}{% if p._pv %}{{ p._pv }}{% else %}0{% endif %}{% endcapture %}
   {% endif %}
